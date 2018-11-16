@@ -5,4 +5,4 @@
 #define $1 
 
 
-#endif
+#endif // $1
