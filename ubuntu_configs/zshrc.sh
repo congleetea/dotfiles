@@ -115,14 +115,14 @@ export GOROOT=/usr/local/go
 export GOPATH=/home/${USER}/gitlab/go
 export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
 
-if [ -d /opt/google/protobuf ];then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
-    export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
-    export PATH=$PATH:/opt/google/protobuf/bin/
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
-    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
-    export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
-fi
+#if [ -d /opt/google/protobuf ];then
+#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
+#    export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
+#    export PATH=$PATH:/opt/google/protobuf/bin/
+#    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
+#    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
+#    export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
+#fi
 
 ## for ros
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src 
@@ -176,6 +176,9 @@ function gstyle() {
   astyle --options=/home/$USER/gitlab/dotfiles/ubuntu_configs/astylerc --preserve-date $* 
 }
 
+function cpwd() {
+    pwd | xclip -selection clipboard
+}
 
 function pdf() {
     zathura $1 & 
