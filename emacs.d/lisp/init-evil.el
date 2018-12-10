@@ -54,6 +54,7 @@
     "S"  'delete-trailing-whitespace
     "t"  'gtags-reindex
     "T"  'gtags-find-tag
+    "m"  'gtags-find-tag-other-window
     "ui"  'uimage-mode
     "w"  'save-buffer
     "x"  'helm-M-x

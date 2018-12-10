@@ -57,9 +57,10 @@ plugins=(git git-flow-avh autojump)
 [[ -s /home/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /home/$USER/.autojump/etc/profile.d/autojump.sh
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-
+export PATH=$PATH:/home/congleetea/gitlab/egodeps/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
+export BOOST_ROOT=/home/congleetea/gitlab/egodeps/boost
+export STAGING_DIR=""
+ 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -184,5 +185,5 @@ function pdf() {
     zathura $1 & 
 }
 
-alias rm="trash"
 alias unzip="unzip -O CP936 "
+alias rm="trash"

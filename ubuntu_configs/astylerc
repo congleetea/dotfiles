@@ -13,7 +13,7 @@
 --align-pointer=name
 --align-reference=name
 
---max-code-length=80
+--max-code-length=100
 --break-after-logical
 
 --pad-oper
@@ -23,3 +23,5 @@
 --pad-header
 
 --suffix=none
+
+--delete-empty-lines
