@@ -57,8 +57,8 @@ plugins=(git git-flow-avh autojump)
 [[ -s /home/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /home/$USER/.autojump/etc/profile.d/autojump.sh
 # User configuration
 
-export PATH=$PATH:/home/congleetea/gitlab/egodeps/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
-export BOOST_ROOT=/home/congleetea/gitlab/egodeps/boost
+export PATH=$PATH:/home/${USER}/gitlab/egodeps/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
+export BOOST_ROOT=/home/${USER}/gitlab/egodeps/boost
 export STAGING_DIR=""
  
 source $ZSH/oh-my-zsh.sh
@@ -151,7 +151,7 @@ alias aptinstall="sudo apt-get install "
 alias ninstall="sudo npm install -g"
 alias pinstall="sudo pip install"
 alias ot="nautilus"
-
+alias ycmd="/home/${USER}/gitlab/dotfiles/ubuntu_pkgs/YCM-Generator/config_gen.py ./"
 alias szsh="source ~/.zshrc"
 alias dl="cd ~/Downloads"
 alias dc="cd ~/Documents"
@@ -163,7 +163,7 @@ function mkcd() { mkdir -p "$@" && cd "$_"; }
 function seddir() { sed -i "s/$1/$2/g" `grep $1 -rl ./` }
 function ginit() {
   echo "[user]" >> .git/config
-  echo "     name  = lixuancong" >> .git/config
+  echo "     name  = congleetea" >> .git/config
   echo "     email = clare@eaibot.com" >> .git/config
   echo "GPATH\nGRTAGS\nGTAGS" >> .gitignore
 }
