@@ -161,11 +161,19 @@ alias mj="make -j4"
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 function seddir() { sed -i "s/$1/$2/g" `grep $1 -rl ./` }
+
+# usage: cd your_project && ginit yourname youremail
 function ginit() {
-  echo "[user]" >> .git/config
-  echo "     name  = congleetea" >> .git/config
-  echo "     email = clare@eaibot.com" >> .git/config
-  echo "GPATH\nGRTAGS\nGTAGS" >> .gitignore
+    if [ -z $1 -a -z $2 ];then
+        echo "USAGE: "
+        echo "     cd your_project"
+        echo "     ginit yourname your@email.com"
+    else
+        echo "[user]" >> .git/config
+        echo "     name  = $1" >> .git/config
+        echo "     email = $2" >> .git/config
+        echo "GPATH\nGRTAGS\nGTAGS" >> .gitignore
+    fi
 }
 
 function cm() {
