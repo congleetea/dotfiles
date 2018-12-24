@@ -11,6 +11,12 @@ nmap <Leader>cp              :!xclip -i -selection clipboard % <CR><CR>
 nmap <Leader>L               :set list!<CR>
 
 
+if ! has("gui_running") 
+    set t_Co=256 
+endif 
+" feel free to choose :set background=light for a different style 
+colors peaksea
+
 "显示行号
 set nu!
 

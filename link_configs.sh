@@ -42,10 +42,15 @@ DIST_TERM=${HOME}/.gitconfig
 lnif $SRC_TERM $DIST_TERM
 
 
-# unlink and link vimrc 
+# unlink and link vimrc and .vim 
 echo ">>>> unlink and link ~/.vimrc"
 SRC_TERM=${CONF_DIR}/vimrc
 DIST_TERM=${HOME}/.vimrc
 lnif $SRC_TERM $DIST_TERM
 
-
+if [ ! -d ${HOME}/.vim ];then
+    mkdir -p ${HOME}/.vim
+fi
+SRC_TERM=${CONF_DIR}/vimcolour
+DIST_TERM=${HOME}/.vim/colors
+lnif $SRC_TERM $DIST_TERM
