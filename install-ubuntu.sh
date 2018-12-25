@@ -113,24 +113,32 @@ function install(){
             ~/.fzf/install
             source ~/.zshrc
         elif [ $sw == "emacs" ];then
+            if [ ! -f ${SWDIR}/emacs-${EMACS_VER}.tar.gz ];then
+                cd ${SWDIR} && wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-${EMACS_VER}.tar.gz
+            fi
             cd ${SWDIR} && tar xvf emacs-${EMACS_VER}.tar.gz && cd emacs-${EMACS_VER} && ./configure && make && sudo make install
+            cd ${SWDIR} && rm -rf emacs-${EMACS_VER}
             sudo apt-get install -y exuberant-ctags
             install_deps build-essential texinfo libx11-dev libxpm-dev libgif-dev
             install_deps openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev
             install_deps texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex # for org exported to pdf.
-            # cd ${SWDIR} && wget ftp://ftp.gnu.org/pub/gnu/global/global-6.5.7.tar.gz
+            if [ ! -f ${SWDIR}/global-6.5.7.tar.gz ];then
+                cd ${SWDIR} && wget ftp://ftp.gnu.org/pub/gnu/global/global-6.5.7.tar.gz
+            fi
             cd ${SWDIR} && tar xvf global-6.5.7.tar.gz && cd global-6.5.7 && ./configure && make && sudo make install
             # echo "export GTAGSCONF=/usr/local/share/gtags/gtags.conf" >> ~/.zshrc
             # echo "export GTAGSLABEL=ctags gtags" >> ~/.zshrc
+            cd ${SWDIR} && rm -rf global-6.5.7
         elif [ $sw == "ycmd" ];then
             if [ ! -d "${SWDIR}/ycmd" ];then
                 git clone https://github.com/Valloric/ycmd.git
             fi
-            install_deps libclang-3.8-dev clang-3.5
+            install_deps libclang-3.8-dev clang-3.8
             sudo ln -s /usr/bin/clang-3.8 /usr/bin/clang
             sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
             cd ${SWDIR}/ycmd && git submodule update --init --recursive
-            cd ${SWDIE} && ./build.py --clang-completer --system-libclang
+            cd ${SWDIR}/ycmd && ./build.py --clang-completer --system-libclang
+            echo "Now you can execute command: ycmd in your project to generate .ycm_extra_conf.py, then enjoy it."
         elif [ $sw == "erlang" ]; then
             cd ${SWDIR}
             # wget http://erlang.org/download/otp_src_$ERLANG_VER.tar.gz
