@@ -40,6 +40,8 @@ link terminator config, .emacs.d, .zshrc, gitconfig, vimrc(TODO).
 
 ** emacs
 
+Here emacs need version 25.+.
+
 *** 编写emacs相关内容的时候，常用的快捷键：
 
    | 快捷键   | 说明                 |

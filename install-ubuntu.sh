@@ -13,6 +13,7 @@ SWDIR=${THISDIR}/ubuntu_pkgs
 CONFIGDIR=${THISDIR}/ubuntu_configs
 
 EMACS_VER=25.2
+GLOBAL_VER=6.5.7
 ERLANG_VER=20.3
 GOVERSION=1.10.3
 
@@ -122,13 +123,13 @@ function install(){
             install_deps build-essential texinfo libx11-dev libxpm-dev libgif-dev
             install_deps openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev
             install_deps texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex # for org exported to pdf.
-            if [ ! -f ${SWDIR}/global-6.5.7.tar.gz ];then
-                cd ${SWDIR} && wget ftp://ftp.gnu.org/pub/gnu/global/global-6.5.7.tar.gz
+            if [ ! -f ${SWDIR}/global-${GLOBAL_VER}.tar.gz ];then
+                cd ${SWDIR} && wget ftp://ftp.gnu.org/pub/gnu/global/global-${GLOBAL_VER}.tar.gz
             fi
-            cd ${SWDIR} && tar xvf global-6.5.7.tar.gz && cd global-6.5.7 && ./configure && make && sudo make install
+            cd ${SWDIR} && tar xvf global-${GLOBAL_VER}.tar.gz && cd global-${GLOBAL_VER} && ./configure && make && sudo make install
             # echo "export GTAGSCONF=/usr/local/share/gtags/gtags.conf" >> ~/.zshrc
             # echo "export GTAGSLABEL=ctags gtags" >> ~/.zshrc
-            cd ${SWDIR} && rm -rf global-6.5.7
+            cd ${SWDIR} && rm -rf global-${GLOBAL_VER}
         elif [ $sw == "ycmd" ];then
             if [ ! -d "${SWDIR}/ycmd" ];then
                 git clone https://github.com/Valloric/ycmd.git
