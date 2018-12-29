@@ -4,7 +4,7 @@
 # --
 %%%--------------------------------------------------------------------
 %%% @Copyright(c) 2016-2017 MOLMC Enterprise, Inc. (https://intoyun.com)
-%%% @author Xuancong Lee <congleetea@gmail.com>
+%%% @author Clare Lee <congleetea@gmail.com>
 %%%--------------------------------------------------------------------
 
 -module($1).

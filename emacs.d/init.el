@@ -7,7 +7,7 @@
 
 ;;; set custom variables
 (setq default-directory "~/gitlab")
-(setq user-full-name "Xuancong Lee")
+(setq user-full-name "Clare Lee")
 (setq user-mail-address "congleetea@gmail.com")
 
 ;;; set system directory and load them.

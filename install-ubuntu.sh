@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # File: uinstall.sh
-# Author: Xuancong Lee[congleetea] <congleetea@gmail.com>
+# Author: Clare Lee[congleetea] <congleetea@gmail.com>
 # Created: Monday, February 22 2016
 #
 
