@@ -45,6 +45,7 @@ option_sws=(emacs
             xmind
             erlang
             golang
+            variety
             ansible)
 
 function usage() {
@@ -184,6 +185,11 @@ function install(){
             sudo cp ${CONFIGDIR}/polipo.conf /etc/polipo/config
             sudo service polipo stop
             sudo service polipo start
+        elif [ $sw == "variety" ]; then
+            # an automatic wallpaper changer, downloader and manager.
+            sudo add-apt-repository ppa:peterlevi/ppa
+            sudo apt-get update
+            sudo apt-get install variety
         elif [ $sw == "ansible" ]; then
             sudo apt-get install -y software-properties-common
             sudo apt-add-repository ppa:ansible/ansible
