@@ -132,14 +132,14 @@ function install(){
             # echo "export GTAGSLABEL=ctags gtags" >> ~/.zshrc
             cd ${SWDIR} && rm -rf global-${GLOBAL_VER}
         elif [ $sw == "ycmd" ];then
-            if [ ! -d "${SWDIR}/ycmd" ];then
-                git clone https://github.com/Valloric/ycmd.git
+            if [ ! -d "${THISDIR}/emacs.d/vendor/ycmd" ];then
+                cd ${THISDIR}/emacs.d/vendor && git clone https://github.com/Valloric/ycmd.git
             fi
             install_deps libclang-3.8-dev clang-3.8
             sudo ln -s /usr/bin/clang-3.8 /usr/bin/clang
             sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
-            cd ${SWDIR}/ycmd && git submodule update --init --recursive
-            cd ${SWDIR}/ycmd && ./build.py --clang-completer --system-libclang
+            cd ${THISDIR}/emacs.d/vendor/ycmd && git submodule update --init --recursive
+            cd ${THISDIR}/emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
             echo "Now you can execute command: ycmd in your project to generate .ycm_extra_conf.py, then enjoy it."
         elif [ $sw == "erlang" ]; then
             cd ${SWDIR}

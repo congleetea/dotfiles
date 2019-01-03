@@ -11,3 +11,6 @@ projectile.cache
 url
 recentf
 emacs.d/eshell
+emacs.d/vendor/ycmd
+emacs.d/vendor/YCM-Generator
+

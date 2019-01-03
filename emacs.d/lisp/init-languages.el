@@ -280,8 +280,8 @@
   :ensure t
   :init (add-hook 'c++-mode-hook #'ycmd-mode)
   :config
-  (set-variable 'ycmd-server-command '("/usr/bin/python" "~/gitlab/dotfiles/ubuntu_pkgs/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "~/gitlab/dotfiles/ubuntu_pkgs/ycmd/.ycm_extra_conf.py"))
+  (set-variable 'ycmd-server-command '("/usr/bin/python" "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/.ycm_extra_conf.py"))
 
 (use-package company-ycmd
   :ensure t
