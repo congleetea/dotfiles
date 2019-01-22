@@ -24,4 +24,4 @@
 
 --suffix=none
 
---delete-empty-lines
+--indent-switches

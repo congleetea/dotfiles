@@ -42,7 +42,6 @@ base_sws=(tree
 
 option_sws=(emacs
             ycmd
-            xmind
             erlang
             golang
             variety
@@ -135,11 +134,15 @@ function install(){
             if [ ! -d "${THISDIR}/emacs.d/vendor/ycmd" ];then
                 cd ${THISDIR}/emacs.d/vendor && git clone https://github.com/Valloric/ycmd.git
             fi
+            if [ ! -d "${THISDIR}/emacs.d/vendor/YCM-Generator" ];then
+                cd ${THISDIR}/emacs.d/vendor && git clone https://github.com/rdnetto/YCM-Generator.git
+            fi
             install_deps libclang-3.8-dev clang-3.8
             sudo ln -s /usr/bin/clang-3.8 /usr/bin/clang
             sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
             cd ${THISDIR}/emacs.d/vendor/ycmd && git submodule update --init --recursive
             cd ${THISDIR}/emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
+
             echo "Now you can execute command: ycmd in your project to generate .ycm_extra_conf.py, then enjoy it."
         elif [ $sw == "erlang" ]; then
             cd ${SWDIR}
@@ -195,10 +198,6 @@ function install(){
             sudo apt-add-repository ppa:ansible/ansible
             sudo apt-get update
             sudo apt-get install -y ansible
-        elif [ $sw == "xmind" ]; then
-            # download xmind package in $SWDIR
-            cd ${SWDIR} && sudo unzip xmind-8-update7-linux.zip -d /opt/xmind
-            cd /opt/xmind && sudo ./setup.sh && sudo chmod 777 -R /opt/xmind/*
         elif [ $sw == "pdfeditor" ]; then
             if [ ! -f ${SWDIR}/master-pdf-editor-4.0.10_qt5.amd64.deb ]; then
                 cd ${SWDIR} && wget http://get.code-industry.net/public/master-pdf-editor-4.0.10_qt5.amd64.deb
