@@ -183,11 +183,15 @@ function install(){
             # http://droidyue.com/blog/2016/04/04/set-shadowsocks-proxy-for-terminal/index.html
             sudo apt-get install -y python-pip
             sudo pip install --upgrade git+https://github.com/shadowsocks/shadowsocks.git@master
-	    cd ${SWDIR} && tar xvf libsodium.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make && sudo make install
+            if [ !f ${SWDIR}/libsodium.tar.gz ];then
+                cd ${SWDIR} && wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz -O libsodium-stable.tar.gz
+            fi
+            cd ${SWDIR} && tar xvf libsodium-stable.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make && sudo make install
             sudo apt-get install -y polipo
             sudo cp ${CONFIGDIR}/polipo.conf /etc/polipo/config
             sudo service polipo stop
             sudo service polipo start
+            rm -rf ${SWDIR}/libsodium-stable
         elif [ $sw == "variety" ]; then
             # an automatic wallpaper changer, downloader and manager.
             sudo add-apt-repository ppa:peterlevi/ppa
