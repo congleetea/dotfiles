@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Install Oracle Java from PPA
+function install_oracle_java {
+	NAME="Oracle Java 9"
+	PACKAGE="oracle-java9-installer"
+	# Do not include the "ppa:" bit, it will break other functions
+	PPA="webupd8team/java"
+	# Add PPA repository
+	add_launchpad_ppa "$NAME" "$PPA" install_thirdparty
+	# check exit status
+	if [ $? = 0 ]; then
+		# Install package
+		install_package "$NAME" "$PACKAGE" install_thirdparty
+	else
+		# Cancelled
+		echo_message info "Installation of $NAME cancelled."
+		# return
+		install_thirdparty
+	fi
+}

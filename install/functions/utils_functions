@@ -1,0 +1,167 @@
+#!/bin/bash
+
+# Fancy colorful echo messages
+function echo_message(){
+	local color=$1;
+	local message=$2;
+	if ! [[ $color =~ '^[0-9]$' ]] ; then
+		case $(echo -e $color | tr '[:upper:]' '[:lower:]') in
+			# black
+			header) color=0 ;;
+			# red
+			error) color=1 ;;
+			# green
+			success) color=2 ;;
+			# yellow
+			welcome) color=3 ;;
+			# blue
+			title) color=4 ;;
+			# purple
+			info) color=5 ;;
+			# cyan
+			question) color=6 ;;
+			# orange
+			warning) color=202 ;;
+			# white
+			*) color=7 ;;
+		esac
+	fi
+	tput bold;
+	tput setaf $color;
+	echo '-- '$message;
+	tput sgr0;
+}
+
+
+# Install single package function
+#
+# ${1} = Name
+# ${2} = package-name
+# ${3} = return_function
+
+function install_package() {
+	echo_message header "Starting 'install_package' function..."
+	# If package is not installed
+	if [ $(check_package_installed ${2}) != 0 ]; then
+		echo_message info "${2} is not installed. Installing..."
+		if (whiptail \
+			--title "Install ${1^}" \
+			--yesno "Proceed with installation of ${1^}?" 8 56) then
+			# Install
+			echo_message info "Installing package '${2}'..."
+			# Admin privileges
+			superuser_do "apt install -y ${2}"
+			# Finished
+			echo_message success "Installation of package '${2}' is complete."
+			whiptail --title "Finished" --msgbox "Installation of ${1} complete." 8 56
+			# return
+			${3}
+		else
+			# Cancelled
+			echo_message info "Installation of ${1} cancelled."
+			# return
+			${3}
+		fi
+	else
+		# Already installed
+		echo_message info "Package '${2}' is already installed."
+		whiptail --title "Finished" --msgbox "Installation of ${1} is already complete." 8 56
+		# return
+		${3}
+	fi
+}
+
+# Install single remote package function
+#
+# ${1} = Name
+# ${2} = package
+# ${3} = https://remote.example.com/
+# ${4} = return_function
+
+function install_remote_package() {
+	echo_message header "Starting 'install_remote_package' function..."
+	# If package is not installed
+	if [ $(check_package_installed ${2}) != 0 ]; then
+		echo_message info "${1} is not installed."
+		# Download Debian file that matches system architecture
+		case `uname -i` in
+			i386|i486|i586|i686)
+				# Download 32 bit package
+				echo_message info "Downloading remote package '${2}_i386.deb' from '${3}'..."
+				curl -O ${3}/${2}_i386.deb
+				;;
+			x86_64)
+				# Download 64 bit package
+				echo_message info "Downloading remote package '${2}_amd64.deb' from '${3}'..."
+				curl -O ${3}/${2}_amd64.deb
+				;;
+			*)
+				whiptail --title "Error." --msgbox "No remote packages available to download." 8 56
+				${4}
+				;;
+		esac
+		# Install package(s)
+		echo_message info "Installing '${2}' package..."
+		superuser_do "dpkg -i ${2}*.deb"
+		# Install depencies, if any
+		echo_message info "Correcting any dependency errors..."
+		superuser_do "apt install -fy"
+		# Cleanup and finish
+		rm ${2}*.deb
+		# Done
+		echo_message success "Installation of ${1} complete."
+		whiptail --title "Finished" --msgbox "Installation of ${1} complete." 8 56
+		${4}
+	else
+		# Already installed
+		echo_message info "${1} already installed."
+		whiptail --title "Finished" --msgbox "${1} is already installed." 8 56
+		${4}
+	fi
+}
+
+# Install from list function
+#
+# ${1} = Name
+# ${2} = list-name
+# ${3} = return_function
+
+function install_from_list() {
+	# echo_message header "Starting 'install_from_list' function..."
+	echo_message title "Starting installation of ${1}..."
+	# Variables
+	LIST=$(dirname "$0")'/data/'${2}'.list'
+	# Draw window
+	if (eval `resize` && whiptail \
+		--title "Install ${2^}" \
+		--yesno "Current list of packages that will be installed: \n\n$(cat ${LIST}) \n\nWould you like to proceed?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext \
+		3>&1 1>&2 2>&3) then
+		# Install loop
+		for PACKAGE in $(cat $LIST); do
+			# If package is not installed
+			if [ $(check_package_installed $PACKAGE) != 0 ]; then
+				# Install package
+				echo_message warning "Package '$PACKAGE' is not installed. Installing..."
+				# Admin privileges
+				superuser_do "apt install -y $PACKAGE"
+				# Check if failed
+				if [[ $? != 0 ]]; then
+					echo_message error "Error installing '$PACKAGE'."
+				fi
+			else
+				# Show already installed message
+				echo_message info "Package '$PACKAGE' is installed."
+			fi
+		done
+		# Finished
+		echo_message success "Installation of ${1} complete."
+		whiptail --title "Finished" --msgbox "Installation of ${1} is complete." 8 56
+		${3}
+	else
+		# Cancelled
+		echo_message info "Installation of ${1} cancelled."
+		${3}
+	fi
+}

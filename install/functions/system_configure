@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Automatically set preferred gsettings keys as outlined in the 'gsettings.list' file
+# 'gsettings' can be obtained by executing "dconf watch /" and then manually changing settings
+function gsettings_config {
+	echo_message info "Setting preferred application-specific & desktop settings..."
+	# Variables
+	LIST=$(dirname "$0")'/data/gsettings.list'
+	while IFS= read line
+	do
+		gsettings set $line
+	done < "$LIST"
+	# Finished
+	echo_message success "Settings changed successfully."
+	whiptail --title "Finished" --msgbox "Settings changed successfully." 8 56
+	system_configure
+}
+
+
+# Disable apport crash dialogs
+function disable_crash_dialogs {
+	# Check if apport is aleady disabled.
+	if [[ $(cat '/etc/default/apport' | grep -q 'enabled=0'; echo $?) != 0 ]]; then
+		echo_message info "Disabling Apport crash dialogs..."
+		superuser_do "sed --in-place s/enabled=1/enabled=0/g /etc/default/apport"
+		# Finished
+		echo_message info "Apport crash dialogs disabled."
+		whiptail --title "Finished" --msgbox "Apport crash dialogs disabled successfully." 8 56
+		system_configure
+	else
+		# Already configured
+		echo_message info "Apport crash dialogs are aleady disabled."
+		whiptail --title "Finished" --msgbox "Apport crash dialogs are aleady disabled." 8 56
+		system_configure
+	fi
+}
+
+# Hide snap directory in home folder
+function hide_snap_folder {
+	# Check if snap folder is aleady hidden.
+	if [[ $(cat ~/.hidden | grep -q 'snap'; echo $?) != 0 ]]; then
+		echo_message info "Hiding 'snap' folder in user home..."
+		echo snap >> ~/.hidden
+		# Finished
+		echo_message info "Successfully hidden 'snap' folder in user home."
+		whiptail --title "Finished" --msgbox "Successfully hidden 'snap' folder in user home" 8 56
+		system_configure
+	else
+		# Already configured
+		echo_message info "The 'snap' folder in user home is already hidden."
+		whiptail --title "Finished" --msgbox "The 'snap' folder in user home is already hidden." 8 56
+		system_configure
+	fi
+}
+
+# Configure System
+function system_configure {
+	NAME="System Configuration"
+	echo_message title "Starting ${NAME,,}..."
+	# Draw window
+	CONFIGURE=$(eval `resize` && whiptail \
+		--notags \
+		--title "$NAME" \
+		--menu "\nWhat would you like to do?" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		'disable_crash_dialogs'     'Disable error report dialogs (apport)' \
+		'gsettings_config'          'Set preferred application & desktop settings' \
+		'hide_snap_folder'          'Hide the snap folder in user home' \
+		3>&1 1>&2 2>&3)
+	# check exit status
+	if [ $? = 0 ]; then
+		echo_message header "Starting '$CONFIGURE' function"
+		$CONFIGURE
+	else
+		# Cancelled
+		echo_message info "$NAME cancelled."
+		main
+	fi
+}

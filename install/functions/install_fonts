@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Install preferred fonts
+function install_fonts {
+	# Update the list of packages in 'data/fonts.list' to suit your preferences
+	install_from_list "preferred fonts" "fonts" install_ubuntu_fonts
+}
+
+# Install Fonts
+function install_ubuntu_fonts {
+	NAME="Fonts"
+	echo_message title "Starting ${NAME,,}..."
+	# Draw window
+	FONTS=$(eval `resize` && whiptail \
+		--notags \
+		--title "Install $NAME" \
+		--menu "\nWhat would you like to do?" \
+		--ok-button "Install" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		'install_fonts'        'Install favourite fonts' \
+		3>&1 1>&2 2>&3)
+	# check exit status
+	if [ $? = 0 ]; then
+		echo_message header "Starting '$FONTS' function"
+		$FONTS
+	else
+		# Cancelled
+		echo_message info "$NAME installation cancelled."
+		main
+	fi
+}

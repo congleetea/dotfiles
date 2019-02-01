@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Perform system upgrade via apt
+function update_system {
+	echo_message title "Performing system update..."
+	# Draw window
+	if (whiptail --title "System Update" --yesno "Check for system software updates?" 8 56) then
+		# Update repository information
+		echo_message info 'Refreshing repository information...'
+		# Admin privileges
+		superuser_do 'apt update -y -qq'
+		echo_message success 'Repository information updated.'
+		# List upgrades
+		if [ $(apt list --upgradeable | wc -l) = 1 ]; then
+			# Cancelled
+			echo_message info "System is up to date."
+			whiptail --title "Finished" --msgbox "No updates available. System is up to date." 8 56
+			system_update
+		else
+			# Move on to package upgrade
+			if (eval `resize` && whiptail \
+				--title "System Upgrade" \
+				--yesno "Current list of packages to be updated: \n\n$(apt list --upgradeable | sed 's/\/.*//;/^Listing.../d') \n\nAre you sure you want proceed?" \
+				$LINES $COLUMNS $(( $LINES - 12 )) \
+				--scrolltext ) then
+				# Upgrade
+				echo_message info 'Upgrading packages...'
+				superuser_do "apt dist-upgrade -y"
+				# Finished
+				echo_message success "System update complete."
+				whiptail --title "Finished" --msgbox "System update complete." 8 56
+				system_update
+			else
+				# Cancelled
+				echo_message info "System update cancelled."
+				system_update
+			fi
+		fi
+	else
+		# Cancelled
+		echo_message info "Installation of ${2} cancelled."
+		system_update
+	fi
+}
+
+# Perform system updates
+function system_update {
+	# install
+	echo_message title "Starting system updates..."
+	# Draw window
+	UPDATE=$(eval `resize` && whiptail \
+		--notags \
+		--title "Install $NAME" \
+		--menu "\nWhat ${NAME,,} would you like to install?" \
+		--ok-button "Install" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		'update_system'         'Check for system updates' \
+		3>&1 1>&2 2>&3)
+
+	# check exit status
+	if [ $? = 0 ]; then
+		echo_message header "Starting '$UPDATE' function..."
+		$UPDATE
+	else
+		# Cancelled
+		echo_message info "System updates cancelled."
+		main
+	fi
+}

@@ -102,7 +102,7 @@ function install(){
             chsh -s /bin/zsh
 
             if [ ! -d "/home/$USER/autojump" ];then
-            	git clone https://github.com/joelthelion/autojump.git ~/autojump
+            	git clone https://github.com/wting/autojump.git ~/autojump
 	    fi
             cd ~/autojump && ./install.py
             # echo "[[ -s /home/${USER}/.autojump/etc/profile.d/autojump.sh ]] && source /home/${USER}/.autojump/etc/profile.d/autojump.sh" >> ~/.zshrc

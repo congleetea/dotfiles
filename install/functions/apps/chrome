@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Install Chrome
+function download_chrome { 
+	# Variables
+	NAME="Google Chrome (${@^})"
+	PACKAGE=google-chrome-$@_current
+	REMOTE="https://dl.google.com/linux/direct"
+	# Download and install remote package
+	install_remote_package "$NAME" $PACKAGE $REMOTE install_thirdparty
+	status=1
+}
+
+# Google Chrome
+function install_chrome {
+	status="0"
+	NAME="Google Chrome"
+	while [ "$status" -eq 0 ]; do
+		VERSION=$(eval `resize` && whiptail \
+		--title "$NAME" \
+		--radiolist "Which version of $NAME would you like to install?" \
+		--ok-button "Install" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		"stable"    "Stable build" ON \
+		"beta"      "Beta build" OFF \
+		"unstable"  "Unstable build" OFF \
+		3>&1 1>&2 2>&3) 
+		# Change to lower case and remove spaces.
+		case "${VERSION}" in
+			stable)
+				download_chrome stable;
+			;;
+			beta)
+				download_chrome beta;
+			;;
+			unstable)
+				download_chrome unstable;
+			;;
+			# return
+			*) status=1 
+				install_thirdparty
+			;;
+		esac
+	done
+}

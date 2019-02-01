@@ -1,0 +1,140 @@
+#!/bin/bash
+#
+# Update the list of packages in 'data/purge.list' to suit your preferences
+# Listed packages that are are not any system-crucial software to avoid breakage
+
+# Remove pre-installed apps
+function purge_unused {
+	NAME="Unused Pre-installed Applications"
+	echo_message title "Removing ${NAME,,}..."
+	# Check list
+	LIST=$(dirname "$0")'/data/purge.list'
+	# Draw window
+	if (eval `resize` && whiptail \
+		--title "Remove $NAME" \
+		--yesno "Current list of ${NAME,,} to remove: \n\n$(cat $LIST) \n\nAre you sure you want proceed?" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext ) then
+		# Remove loop
+		for PACKAGE in $(cat $LIST); do
+			# If package is not installed
+			if [ $(check_package_installed $PACKAGE) != 0 ]; then
+				# Show already removed message
+				echo_message info "Package '$PACKAGE' already removed."
+			else
+				# Remove package
+				echo_message info "'$PACKAGE' is installed. Removing..."
+				# Admin privileges
+				superuser_do "apt remove -y $PACKAGE"
+				# Finished
+				echo_message success "'$PACKAGE' removal is complete."
+			fi
+		done
+		# Finished
+		echo_message success "Removal of ${NAME,,} complete."
+		whiptail --title "Finished" --msgbox "Unwanted ${NAME,,} have been removed." 8 56
+		system_cleanup
+	else
+		# Cancelled
+		echo_message success "Removal of ${NAME,,} cancelled."
+		system_cleanup
+	fi
+}
+# Remove pre-installed apps
+function purge_snaps {
+	NAME="Unused Pre-installed Snaps"
+	echo_message title "Removing ${NAME,,}..."
+	# Check list
+	LIST=$(dirname "$0")'/data/purge-snaps.list'
+	# Draw window
+	if (eval `resize` && whiptail \
+		--title "Remove $NAME" \
+		--yesno "Current list of ${NAME,,} to remove: \n\n$(cat $LIST) \n\nAre you sure you want proceed? \n\n(It may be worthwhile to reinstall some of these as traditional packages.)" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		--scrolltext ) then
+		# Remove loop
+		for PACKAGE in $(cat $LIST); do
+			# If package is not installed
+			if [[ $(snap list | grep $PACKAGE &> /dev/null; echo $?) != 0 ]]; then
+				# Show already removed message
+				echo_message info "snap '$PACKAGE' already removed."
+			else
+				# Remove package
+				echo_message info "snap '$PACKAGE' is installed. Removing..."
+				# Admin privileges
+				superuser_do "snap remove $PACKAGE"
+				# Finished
+				echo_message success "'$PACKAGE' removal is complete."
+			fi
+		done
+		# Finished
+		echo_message success "Removal of ${NAME,,} complete."
+		whiptail --title "Finished" --msgbox "Unwanted ${NAME,,} have been removed." 8 56
+		system_cleanup
+	else
+		# Cancelled
+		echo_message success "Removal of ${NAME,,} cancelled."
+		system_cleanup
+	fi
+}
+
+# Remove Orphaned Packages
+function remove_orphans {
+	echo_message info "Removing orphaned packages..."
+	# Admin privileges
+	superuser_do "apt autoremove -y $PACKAGE"
+	# Done
+	echo_message success "Removal of orphaned packages complete."
+	whiptail --title "Finished" --msgbox "Orphaned packages have been successfully removed." 8 56
+	system_cleanup
+}
+
+# Remove Leftover Config files
+function remove_leftovers {
+	echo_message info "Removing leftover configuration files..."
+	# Admin privileges
+	superuser_do "dpkg --purge $(COLUMNS=200 dpkg -l | grep '^rc' | tr -s ' ' | cut -d ' ' -f 2)"
+	# Done
+	echo_message success "Removal of leftover configuration files complete."
+	whiptail --title "Finished" --msgbox "Leftover configuration files have been removed." 8 56
+	system_cleanup
+}
+
+# Clean packages cache
+function clean_apt_cache {
+	echo_message info "Cleaning package cache..."
+	# Admin privileges
+	superuser_do "apt clean"
+	# Done
+	echo_message success "Package cache cleaned."
+	whiptail --title "Finished" --msgbox "Package cache has been cleaned." 8 56
+	system_cleanup
+}
+
+# Cleanup System
+function system_cleanup {
+	NAME="System Cleanup"
+	echo_message title "Starting ${NAME,,}..."
+	# Draw window
+	CLEANUP=$(eval `resize` && whiptail \
+		--notags \
+		--title "$NAME" \
+		--menu "\nWhat would you like to do?" \
+		--cancel-button "Go Back" \
+		$LINES $COLUMNS $(( $LINES - 12 )) \
+		clean_apt_cache     'Clean package cache' \
+		remove_orphans      'Remove orphaned packages' \
+		remove_leftovers    'Remove leftover configuration files' \
+		purge_unused        'Remove unused pre-installed packages' \
+		purge_snaps         'Remove unused pre-installed snaps' \
+		3>&1 1>&2 2>&3)
+	# check exit status
+	if [ $? = 0 ]; then
+		echo_message header "Starting '$CLEANUP' function"
+		$CLEANUP
+	else
+		# Cancelled
+		echo_message info "$NAME cancelled."
+		main
+	fi
+}
