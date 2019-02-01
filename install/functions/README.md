@@ -19,7 +19,7 @@ Pretty self-explanatory, all the installation functions.
  * [`install_baseapp`](install_baseapp) is used to install packages from the lists in [data](/data). 
  * [`install_fonts`](install_fonts) is used for installing fonts.
  * [`install_functions`](install_functions) contains generic functions for installing a single package, installing a remote package, installing a list of packages, or installing Snap or Flatpak packages, used throughout the other install scripts. 
- * [`install_thirdparty`](install_thirdparty) checks the [apps](apps) folder for additional installation scripts for third-party apps.
+ * [`install_custom_app`](install_custom_app) checks the [apps](apps) folder for additional installation scripts for third-party apps.
 
 ### System Functions
 

@@ -7,7 +7,7 @@ function download_chrome {
 	PACKAGE=google-chrome-$@_current
 	REMOTE="https://dl.google.com/linux/direct"
 	# Download and install remote package
-	install_remote_package "$NAME" $PACKAGE $REMOTE install_thirdparty
+	install_remote_package "$NAME" $PACKAGE $REMOTE install_custom_app
 	status=1
 }
 
@@ -39,7 +39,7 @@ function install_chrome {
 			;;
 			# return
 			*) status=1 
-				install_thirdparty
+				install_custom_app
 			;;
 		esac
 	done

@@ -39,9 +39,9 @@ function main {
 		--cancel-button "Quit" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
 		'system_update'         'Perform system updates' \
-		'install_baseapp'          'Install preferred applications' \
+		'install_baseapp'       'Install basic applications' \
+		'install_custom_app'    'Install custom applications' \
 		'install_fonts'         'Install additional fonts' \
-		'install_thirdparty'    'Install third-party applications' \
 		'setup_dotfiles'        'Configure dotfiles' \
 		'system_configure'      'Configure system' \
 		'system_cleanup'        'Cleanup the system' \
