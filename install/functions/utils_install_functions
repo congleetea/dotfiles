@@ -165,3 +165,13 @@ function install_from_list() {
 		${3}
 	fi
 }
+
+function link() {
+	if [ -e "$2" ]; then
+		unlink $2
+	fi
+
+	if [ -e "$1" ]; then
+		ln -sf "$1" "$2"
+	fi
+}

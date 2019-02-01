@@ -32,6 +32,8 @@ function install_custom_app {
 		$LINES $COLUMNS $(( $LINES - 12 )) \
 		'install_chrome'        'Google Chrome' \
 		'install_oracle_java'   'Oracle Java' \
+        'install_terminator'    'terminator' \
+        'install_sougou'        'Sougou Input'
 		3>&1 1>&2 2>&3)
 
 	# check exit status

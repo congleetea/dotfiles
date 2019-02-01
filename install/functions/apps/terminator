@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function install_terminator {
+	NAME="terminator"
+	PACKAGE="terminator "
+    # check exit status
+    Src=$(dirname "$0")'/data/config/terminator.conf'
+    Dest=$HOME/.config/terminator/config
+    link $Src $Dest
+    if [ $? = 0 ]; then
+		# Install package
+		install_package "$NAME" "$PACKAGE" install_custom_app
+	else
+		# Cancelled
+		echo_message info "Installation of $NAME cancelled."
+		# return
+		install_custom_app
+	fi
+}

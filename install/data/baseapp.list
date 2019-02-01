@@ -3,4 +3,9 @@ git
 gnome-software
 openssh-server
 ssh
+openssl
 nautilus
+tree
+trash-cli
+valgrind
+xclip
