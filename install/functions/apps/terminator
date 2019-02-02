@@ -4,7 +4,8 @@ function install_terminator {
 	NAME="terminator"
 	PACKAGE="terminator "
     # check exit status
-    Src=$(dirname "$0")'/data/config/terminator.conf'
+    ThisDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+    Src=$ThisDir/../../data/config/terminator.conf
     Dest=$HOME/.config/terminator/config
     link $Src $Dest
     if [ $? = 0 ]; then
