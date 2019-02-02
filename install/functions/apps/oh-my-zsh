@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Install Oh-my-zsh 
+function install_oh-my-zsh {
+    superuser_do "sudo apt-get install -y zsh"
+    if [ ! -d "$HOME/.oh-my-zsh" ];then
+        git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    fi
+    ThisDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+    Src=$ThisDir/../../data/config/zshrc.in
+    Dest=$HOME/.zshrc
+    link $Src $Dest
+    superuser_do "chsh -s /bin/zsh" 
+
+    if [ ! -d "$HOME/autojump" ];then
+        git clone https://github.com/wting/autojump.git ~/autojump
+    fi
+    cd ~/autojump && ./install.py
+    # echo "[[ -s \$HOME/.autojump/etc/profile.d/autojump.sh ]] && source \${HOME}/.autojump/etc/profile.d/autojump.sh" >> ~/.zshrc
+    rm -rf ~/autojump
+
+    if [ ! -d "$HOME/.fzf" ];then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    fi
+    $HOME/.fzf/install --all
+    echo_message info "Source ~/.zshrc"
+    source ~/.zshrc
+}
