@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Install Sogou 
+function install_sogou {
+    superuser_do "sudo apt-get install -y fcitx libssh2-1"
+ 	# Variables
+	NAME="SogouPinyinInput"
+	PACKAGE="sogoupinyin_2.2.0.0108"
+	REMOTE="http://cdn2.ime.sogou.com/dl/index/1524572264"
+	# Download and install remote package
+	install_remote_package $NAME $PACKAGE $REMOTE install_custom_app
+}

@@ -3,7 +3,7 @@
 # Check dpkg for package installation status
 function check_package_installed() {
 	# query dpkg for install status and return a value
-	dpkg-query -W --showformat='${Status}\n' $@ | grep "install ok installed" &> /dev/null; echo $?
+	dpkg-query -W --showformat='${Package}_${Version}\n' | grep $@ &> /dev/null; echo $?
 }
 
 # Check if single package is installed
