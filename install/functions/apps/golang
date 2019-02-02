@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Install golang 
+function install_golang {
+    GOTO=/usr/local
+    GOROOT=${GOTO}/go
+    GOPATH=$HOME/gitlab/go
+    GOVERSION=1.11.5
+    REMOTE=https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
+    if [ ! -d ${GOROOT} ]; then
+        superuser_do "rm  -rf ${GOROOT}"
+    fi
+    if [ ! -d ${GOPATH} ]; then
+        mkdir -p ${GOPATH} 
+    fi
+    curl -O $REMOTE 
+    superuser_do "tar -C /usr/local -xzf go${GOVERSION}.linux-amd64.tar.gz"
+    echo "export GOROOT=${GOROOT}" >> ~/.zshrc
+    echo "export GOPATH=${GOPATH}" >> ~/.zshrc
+    echo "export PATH=\$PATH:${GOROOT}/bin:${GOPATH}/bin" >> ~/.zshrc
+    echo "GOPATH: $GOPATH"
+    source ~/.zshrc
+    go get github.com/rogpeppe/godef
+    go get github.com/nsf/gocode
+    rm go${GOVERSION}.linux-amd64.tar.gz
+    echo_message success "Installation of golang complete."
+}

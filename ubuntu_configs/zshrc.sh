@@ -196,3 +196,6 @@ function pdf() {
 
 alias unzip="unzip -O CP936 "
 alias rm="trash"
+export GOROOT=/usr/local/go
+export GOPATH=/home/congleetea/gitlab/go
+export PATH=$PATH:/usr/local/go/bin:/home/congleetea/gitlab/go/bin
