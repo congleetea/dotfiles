@@ -30,13 +30,14 @@ function install_custom_app {
 		--ok-button "Install" \
 		--cancel-button "Go Back" \
 		$LINES $COLUMNS $(( $LINES - 12 )) \
-		'install_chrome'        'Google Chrome' \
-		'install_oracle_java'   'Oracle Java' \
-        'install_terminator'    'terminator' \
-        'install_sogou'         'sogoupinyin' \
-        'install_golang'        'golang' \
-        'install_oh-my-zsh'     'oh-my-zsh' \
-        'install_emacs'         'emacs' \
+		'install_chrome'            'Google Chrome' \
+		'install_oracle_java'       'Oracle Java' \
+        'install_terminator'        'terminator' \
+        'install_sogou'             'sogoupinyin' \
+        'install_golang'            'golang' \
+        'install_oh-my-zsh'         'oh-my-zsh' \
+        'install_emacs'             'emacs' \
+        'install_wallpaper-variety' 'wallpaper-variety' \
 		3>&1 1>&2 2>&3)
 
 	# check exit status
