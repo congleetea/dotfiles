@@ -38,6 +38,7 @@ function install_custom_app {
         'install_oh-my-zsh'         'oh-my-zsh' \
         'install_emacs'             'emacs' \
         'install_wallpaper-variety' 'wallpaper-variety' \
+        'install_shadowsocks'       'shadowsocks' \
 		3>&1 1>&2 2>&3)
 
 	# check exit status

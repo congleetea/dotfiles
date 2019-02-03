@@ -176,6 +176,12 @@ function link() {
 	fi
 }
 
+
+function config_dir() {
+    ThisDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+    echo $ThisDIR/../data/config
+}
+
 function pkgs_dir() {
     ThisDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
     echo $ThisDIR/../pkgs
