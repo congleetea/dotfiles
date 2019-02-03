@@ -36,6 +36,7 @@ function install_custom_app {
         'install_sogou'         'sogoupinyin' \
         'install_golang'        'golang' \
         'install_oh-my-zsh'     'oh-my-zsh' \
+        'install_emacs'         'emacs' \
 		3>&1 1>&2 2>&3)
 
 	# check exit status

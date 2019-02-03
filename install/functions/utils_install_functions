@@ -175,3 +175,8 @@ function link() {
 		ln -sf "$1" "$2"
 	fi
 }
+
+function pkgs_dir() {
+    ThisDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+    echo $ThisDIR/../pkgs
+}

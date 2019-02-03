@@ -2,6 +2,7 @@ vim
 git
 gnome-software
 openssh-server
+openssh-client
 ssh
 openssl
 nautilus
@@ -9,3 +10,4 @@ tree
 trash-cli
 valgrind
 xclip
+silversearcher-ag
