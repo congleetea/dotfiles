@@ -57,7 +57,7 @@
     (setq op/site-domain "https://congleetea.github.io")
     (setq op/personal-github-link "https://github.com/congleetea")
     (setq op/site-main-title "清园索道")
-    (setq op/site-sub-title "吾将上下而求索")
+    (setq op/site-sub-title "上下求索，识己识人识事")
     (setq op/personal-disqus-shortname "congleetea")
     (setq op/hashover-comments t)
     (setq op/theme-root-directory "~/.emacs.d/themes")

@@ -2,6 +2,6 @@
 # name: PlantUML Use Case
 # key: orguml
 # --
-#+BEGIN_SRC plantuml :file ./images/$1.png  :cmdline -charset UTF-8
+#+BEGIN_SRC plantuml :file ./gimages/$1.png  :cmdline -charset UTF-8
 $2
 #+END_SRC                                                                                                                                                                             
