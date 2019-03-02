@@ -41,6 +41,7 @@
   (scroll-bar-mode -1))
 (require 'linum)
 (global-linum-mode t)
+(setq-default fill-column 80)
 
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)

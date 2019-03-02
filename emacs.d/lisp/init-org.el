@@ -13,31 +13,33 @@
              :defer t
              )
 (setq org-plantuml-jar-path (expand-file-name "~/.emacs.d/vendor/plantuml.jar"))
-(setq org-ditaa-jar-path (expand-file-name "~/.emacs.d/vendor/ditaa0_9.jar"))	
-(setq org-confirm-babel-evaluate nil)	
-(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)	
-	
-(require 'ob)	
-(require 'ob-plantuml)	
-(org-babel-do-load-languages	
- 'org-babel-load-languages	
- '(	
-   (emacs-lisp . t)	
-   (plantuml . t)	
-   (org . t)	
-   (sh . t)	
-   (C . t)	
-   (python . t)	
-   (awk . t)	
-   (ditaa . t)	
+(setq org-ditaa-jar-path (expand-file-name "~/.emacs.d/vendor/ditaa0_9.jar"))
+(setq org-confirm-babel-evaluate nil)
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+(setq-default fill-column 80)
+
+(require 'ob)
+(require 'ob-plantuml)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (emacs-lisp . t)
+   (plantuml . t)
+   (org . t)
+   (sh . t)
+   (C . t)
+   (python . t)
+   (awk . t)
+   (ditaa . t)
    (latex . t)
-   ))	
-	
-;; Highlight and indent source code blocks	
-(setq org-src-fontify-natively t)	
-(setq org-src-tab-acts-natively t)	
-	
-;; Prevent confirmation	
+   ))
+
+;; Highlight and indent source code blocks
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+
+;; Prevent confirmation
 (setq org-confirm-babel-evaluate nil)
 
 (use-package htmlize

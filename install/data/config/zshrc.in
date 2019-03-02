@@ -57,7 +57,7 @@ plugins=(git git-flow-avh autojump)
 [[ -s /home/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /home/$USER/.autojump/etc/profile.d/autojump.sh
 # User configuration
 
-export PATH=$PATH:/home/${USER}/gitlab/egodeps/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
+export PATH=$PATH:/home/${USER}/gitlab/egodeps/r16_toolchain/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
 export STAGING_DIR=""
  
 source $ZSH/oh-my-zsh.sh
