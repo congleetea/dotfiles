@@ -2,7 +2,7 @@
 # unlink and link files.
 
 THIS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-CONF_DIR=$THIS_DIR/ubuntu_configs
+CONF_DIR=$THIS_DIR/configs
 
 lnif() {
     if [ -e "$2" ];then

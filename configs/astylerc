@@ -13,7 +13,7 @@
 --align-pointer=name
 --align-reference=name
 
---max-code-length=100
+--max-code-length=80
 --break-after-logical
 
 --pad-oper

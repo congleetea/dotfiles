@@ -27,11 +27,11 @@ include:
 
 link terminator config, .emacs.d, .zshrc, gitconfig, vimrc(TODO).
 
-- ./ubuntu_configs/terminator.conf ${HOME}/.config/terminator/config
-- ./ubuntu_configs/gitconfig ${HOME}/.gitconfig
-- ./ubuntu_configs/zshrc.sh ${HOME}/.zshrc
+- ./configs/terminator.conf ${HOME}/.config/terminator/config
+- ./configs/gitconfig ${HOME}/.gitconfig
+- ./configs/zshrc.sh ${HOME}/.zshrc
 - ./emacs.d  ${HOME}/.emacs.d
-- ./ubuntu_configs/vimrc ${HOME}/.vimrc
+- ./configs/vimrc ${HOME}/.vimrc
 
 #+BEGIN_SRC shell
 ./link_configs.sh

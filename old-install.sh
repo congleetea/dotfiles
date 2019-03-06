@@ -10,7 +10,7 @@ set -e
 # sudo apt-get update
 THISDIR=$( cd "$( dirname "$0")" && pwd )
 SWDIR=${THISDIR}/ubuntu_pkgs
-CONFIGDIR=${THISDIR}/ubuntu_configs
+CONFIGDIR=${THISDIR}/configs
 
 EMACS_VER=25.2
 GLOBAL_VER=6.5.7

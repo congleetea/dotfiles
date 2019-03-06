@@ -183,7 +183,7 @@ function cm() {
 }
 
 function gstyle() {
-  astyle --options=/home/$USER/gitlab/dotfiles/ubuntu_configs/astylerc --preserve-date $* 
+  astyle --options=/home/$USER/gitlab/dotfiles/configs/astylerc --preserve-date $* 
 }
 
 function cpwd() {
