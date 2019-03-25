@@ -47,6 +47,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
 (setq vc-follow-symlinks t)
 (setq large-file-warning-threshold nil)
 (setq split-width-threshold 0)

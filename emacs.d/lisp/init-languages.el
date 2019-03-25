@@ -68,7 +68,21 @@
   (progn
     (setq tab-width 2)
     (setq-default indent-tabs-mode nil)
-    (setq c-basic-offset 2)))
+    (setq c-basic-offset 2))
+  :init
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (set-fill-column 80)
+              (turn-on-auto-fill)
+              (flyspell-mode t)
+              (visual-line-mode t)))
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (set-fill-column 80)
+              (turn-on-auto-fill)
+              (flyspell-mode t)
+              (visual-line-mode t)))
+  )
 
 (use-package google-c-style
   :init
@@ -85,7 +99,7 @@
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/7/"))
 
 ;;---------------------------------------------------------------
-;; Protobuf 
+;; Protobuf
 ;;---------------------------------------------------------------
 (use-package protobuf-mode
              :ensure t
@@ -274,7 +288,7 @@
                  )) auto-insert-alist))
 
 ;;----------------------------------------------------------------------------
-;; YCM 
+;; YCM
 ;;----------------------------------------------------------------------------
 (use-package ycmd
   :ensure t
