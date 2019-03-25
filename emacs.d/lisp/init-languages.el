@@ -74,14 +74,16 @@
             (lambda ()
               (set-fill-column 80)
               (turn-on-auto-fill)
-              (flyspell-mode t)
-              (visual-line-mode t)))
+              ;(flyspell-mode t)
+              ;(visual-line-mode t)
+))
   (add-hook 'c++-mode-hook
             (lambda ()
               (set-fill-column 80)
               (turn-on-auto-fill)
-              (flyspell-mode t)
-              (visual-line-mode t)))
+              ; (flyspell-mode t)
+              ; (visual-line-mode t)
+))
   )
 
 (use-package google-c-style
