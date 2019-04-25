@@ -1,4 +1,4 @@
-;;; package --- Summary
+;;; package --- summary
 ;;; Commentary:
 ;;; Code:
 
@@ -29,7 +29,7 @@
 
 ;;; install packages
 (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://elpa.emacs-china.org/melpa/")
+                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
                          ("org" . "http://elpa.emacs-china.org/org/")))
 
 ;; use proxy if repository is not access.
