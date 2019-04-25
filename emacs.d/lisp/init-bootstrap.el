@@ -79,5 +79,5 @@
 (use-package pangu-spacing
   :ensure t
   :defer t
-  :config (global-pangu-spacing 1))
+  :config (global-pangu-spacing-mode 1))
 (provide 'init-bootstrap)
