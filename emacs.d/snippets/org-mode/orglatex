@@ -2,6 +2,8 @@
 # name: orglatex
 # key: orglatex
 # --
-#+BEGIN_LATEX
+
+
+\begin{equation}
 $1
-#+END_LATEX
+\end{equation}

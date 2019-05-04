@@ -76,8 +76,4 @@
 (use-package dash     :ensure t :defer t)
 (use-package mustache :ensure t :defer t)
 
-(use-package pangu-spacing
-  :ensure t
-  :defer t
-  :config (global-pangu-spacing-mode 1))
 (provide 'init-bootstrap)

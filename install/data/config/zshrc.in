@@ -195,3 +195,4 @@ function pdf() {
 
 alias unzip="unzip -O CP936 "
 alias rm="trash"
+alias sshi="ssh-keygen -f "/home/congleetea/.ssh/known_hosts" -R 192.168.31.200 && ssh "

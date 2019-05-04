@@ -3,6 +3,11 @@
 ;; Basic programming languages
 
 ;;; Code:
+(use-package pangu-spacing
+  :ensure t
+  :defer t
+  :config (global-pangu-spacing-mode t)
+  (setq pangu-spacing-real-insert-separtor t))
 
 ;; --------------------------------------------------------------------
 ;; generate the tag files
