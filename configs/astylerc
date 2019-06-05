@@ -1,5 +1,5 @@
 --lineend=linux
-
+--delete-empty-lines
 --style=google
 --indent=spaces=2
 --attach-namespaces

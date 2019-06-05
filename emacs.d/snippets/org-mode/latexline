@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: latexline 
+# key: latexline 
+# --
+
+$$1$ 
