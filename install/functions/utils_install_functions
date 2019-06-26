@@ -179,10 +179,12 @@ function link() {
 
 function config_dir() {
     ThisDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-    echo $ThisDIR/../data/config
+    CONFIGDIR=$ThisDIR/../data/config
+    echo $CONFIGDIR
 }
 
 function pkgs_dir() {
     ThisDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-    echo $ThisDIR/../pkgs
+    PKGDIR=$ThisDIR/../pkgs
+    echo $PKGDIR
 }
