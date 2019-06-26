@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shadowsocks 
+# shadowsocks
 # http://droidyue.com/blog/2016/04/04/set-shadowsocks-proxy-for-terminal/index.html
 function install_shadowsocks {
     PKGS_DIR=$(pkgs_dir)
@@ -12,10 +12,10 @@ function install_shadowsocks {
         cd ${PKGS_DIR} && wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz -O libsodium-stable.tar.gz
     fi
     cd ${PKGS_DIR} && tar xvf libsodium-stable.tar.gz && cd libsodium-stable && ./configure --prefix=/usr && make
-    superuser_do "cd ${PKGS_DIR}/libsodium-stable && sudo make install"
+    superuser_do "sudo make install"
     superuser_do "cp ${CONFIG_DIR}/polipo.conf /etc/polipo/config"
     superuser_do "service polipo stop"
-    superuser_do "service polipo start" 
+    superuser_do "service polipo start"
     rm -rf ${PKGS_DIR}/libsodium-stable
     echo_message success "Succeed to install shadowsocks, Please configure it."
 }
