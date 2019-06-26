@@ -17,8 +17,9 @@ function install_emacs {
     if [ -d $PKGS_DIR/emacs-${EMACS_VER} ];then
         rm -rf $PKGS_DIR/emacs-${EMACS_VER}
     fi
-    cd $PKGS_DIR && tar xvf emacs-${EMACS_VER}.tar.gz && cd emacs-${EMACS_VER} && ./configure && make
-    superuser_do "cd $PKGS_DIR/emacs-${EMACS_VER} && sudo make install"
+    cd $PKGS_DIR && tar xvf emacs-${EMACS_VER}.tar.gz && cd emacs-${EMACS_VER} && ./configure && make && cd $PKGS_DIR/emacs-${EMACS_VER}
+    echo_message info "make install emacs."
+    superuser_do "sudo make install"
 
     if [ ! -f $PKGS_DIR/global-${GLOBAL_VER}.tar.gz ];then
         cd $PKGS_DIR && curl -O ftp://ftp.gnu.org/pub/gnu/global/global-${GLOBAL_VER}.tar.gz
@@ -27,8 +28,8 @@ function install_emacs {
         rm -rf $PKGS_DIR/global-${GLOBAL_VER}
     fi
 
-    cd $PKGS_DIR && tar xvf global-${GLOBAL_VER}.tar.gz && cd global-${GLOBAL_VER} && ./configure && make
-    superuser_do "cd $PKGS_DIR/global-${GLOBAL_VER} && sudo make install"
+    cd $PKGS_DIR && tar xvf global-${GLOBAL_VER}.tar.gz && cd global-${GLOBAL_VER} && ./configure && make && cd $PKGS_DIR/global-${GLOBAL_VER}
+    superuser_do "sudo make install"
     # echo "export GTAGSCONF=/usr/local/share/gtags/gtags.conf" >> ~/.zshrc
     # echo "export GTAGSLABEL=ctags gtags" >> ~/.zshrc
 
@@ -40,8 +41,15 @@ function install_emacs {
         cd $HOME/.emacs.d/vendor && git clone https://github.com/rdnetto/YCM-Generator.git
     fi
     superuser_do "apt-get install -y libclang-3.8-dev clang-3.8"
-    superuser_do "unlink /usr/bin/clang && ln -s /usr/bin/clang-3.8 /usr/bin/clang"
-    superuser_do "unlink /usr/bin/clang++ && ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
+    if [ -e "/usr/bin/clang" ];then
+        superuser_do "unlink /usr/bin/clang"
+    fi
+    superuser_do "ln -s /usr/bin/clang-3.8 /usr/bin/clang"
+
+    if [ -e "/usr/bin/clang++" ];then
+        superuser_do "unlink /usr/bin/clang++"
+    fi
+    superuser_do "ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
     cd $HOME/.emacs.d/vendor/ycmd && git submodule update --init --recursive
     cd $HOME/.emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
 
