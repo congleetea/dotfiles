@@ -40,8 +40,8 @@ function install_emacs {
         cd $HOME/.emacs.d/vendor && git clone https://github.com/rdnetto/YCM-Generator.git
     fi
     superuser_do "apt-get install -y libclang-3.8-dev clang-3.8"
-    superuser_do "ln -s /usr/bin/clang-3.8 /usr/bin/clang"
-    superuser_do "ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
+    superuser_do "unlink /usr/bin/clang && ln -s /usr/bin/clang-3.8 /usr/bin/clang"
+    superuser_do "unlink /usr/bin/clang++ && ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
     cd $HOME/.emacs.d/vendor/ycmd && git submodule update --init --recursive
     cd $HOME/.emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
 
