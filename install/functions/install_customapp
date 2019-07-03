@@ -33,6 +33,7 @@ function install_custom_app {
 		'install_chrome'            'Google Chrome' \
 		'install_oracle_java'       'Oracle Java' \
         'install_terminator'        'terminator' \
+        'install_system-monitor'    'system-monitor' \
         'install_sogou'             'sogoupinyin' \
         'install_golang'            'golang' \
         'install_oh-my-zsh'         'oh-my-zsh' \

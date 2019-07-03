@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Install system-monitor 
+function install_system-monitor {
+	NAME="System monitor"
+	PACKAGE="indicator-sysmonitor"
+	# Do not include the "ppa:" bit, it will break other functions
+	PPA="fossfreedom/indicator-sysmonitor"
+	# Add PPA repository
+	add_launchpad_ppa "$NAME" "$PPA" install_custom_app
+	# check exit status
+	if [ $? = 0 ]; then
+		# Install package
+		install_package "$NAME" "$PACKAGE" install_custom_app
+	else
+		# Cancelled
+		echo_message info "Installation of $NAME cancelled."
+		# return
+		install_custom_app
+	fi
+}
