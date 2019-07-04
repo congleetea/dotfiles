@@ -15,3 +15,6 @@ emacs.d/eshell
 emacs.d/vendor/ycmd
 emacs.d/vendor/YCM-Generator
 
+GPATH
+GRTAGS
+GTAGS
