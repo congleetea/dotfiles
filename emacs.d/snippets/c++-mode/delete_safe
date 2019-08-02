@@ -1,0 +1,23 @@
+# name: delete safe 
+# key: deletesafe 
+# --
+
+#include <cstddef>
+
+template <class T>
+void delete_safe(T *&ptr) {
+  if (ptr) {
+    delete ptr;
+    ptr = NULL;
+  }
+}
+
+template <class T>
+void delete_safe_array(T *&ptr) {
+  if (ptr) {
+    delete[] ptr;
+    ptr = NULL;
+  }
+}
+
+
