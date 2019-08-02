@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: hmset redis 
-# key: redishmset 
+# key: myredishmset 
 # --
 
 entity = {FIELD1: VAL1,

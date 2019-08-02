@@ -1,5 +1,5 @@
 # name: header define
-# key: headerdef 
+# key: myheaderdef 
 # --
 #ifndef $1 
 #define $1 

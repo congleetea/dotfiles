@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: doc of function
-# key: efdoc
+# key: myefdoc
 # --
 %% @doc $1

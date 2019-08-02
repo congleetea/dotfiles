@@ -1,5 +1,5 @@
 # name: FILE *fp = fopen(..., ...);
-# key: fopen
+# key: myfopen
 # --
 
 FILE *${fp} = fopen(${"file"}, "${r}");

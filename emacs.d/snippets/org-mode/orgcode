@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: orgcode
-# key: orgcode
+# key: myorgcode
 # --
 #+BEGIN_SRC $1
 $2

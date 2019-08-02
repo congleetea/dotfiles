@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: mongodb_pool:find/4 
-# key: mongodb_pool:find4 
+# key: mymongodb_pool:find4 
 # --
 %% mongodb_pool:find/4, make projector true to just get objectId and fields 
 mongodb_pool:find({global, pool1},

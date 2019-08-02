@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: logapp 
-# key: logapp 
+# key: mylogapp 
 # --
 ?LOGAPP("~n~p:~p:$1=~p~n", [?MODULE, ?LINE, $1]),

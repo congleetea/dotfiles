@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: PlantUML Use Case
-# key: orguml
+# key: myorguml
 # --
 #+BEGIN_SRC plantuml :file ./gimages/$1.png  :cmdline -charset UTF-8
 $2

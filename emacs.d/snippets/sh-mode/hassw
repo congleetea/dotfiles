@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: decide the software is installed. 
-# key: hassw 
+# key: myhassw 
 # --
 
 not_install=$(which $1 2>/dev/null | grep -v "not found" | wc -l)

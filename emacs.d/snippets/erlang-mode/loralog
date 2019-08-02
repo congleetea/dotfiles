@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: LORALOG
-# key: loralog 
+# key: myloralog 
 # --
 ?LORALOG("~n~p:~p:$1=~p~n", [?MODULE, ?LINE, $1]),

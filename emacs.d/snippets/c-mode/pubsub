@@ -1,5 +1,5 @@
 # name: pubsub 
-# key: pubsub 
+# key: mypubsub 
 # --
 
 ego::comms::TopicDirectory::Ptr pubsub_;                                                                                   

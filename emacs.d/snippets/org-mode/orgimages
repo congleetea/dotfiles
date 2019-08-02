@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: insert images in org
-# key: orgimages 
+# key: myorgimages 
 # --
 #+CAPTION: $1 
 #+LABEL: fig:SED-HR4049

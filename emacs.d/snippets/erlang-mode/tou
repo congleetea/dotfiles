@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: header of a erlang file 
-# key: tou 
+# key: mytou 
 # --
 %%%--------------------------------------------------------------------
 %%% @Copyright(c) 2016-2017 MOLMC Enterprise, Inc. (https://intoyun.com)
