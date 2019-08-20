@@ -1,5 +1,7 @@
 vim-gtk
 vim
+doxygen
+doxygen-gui
 git
 gnome-software
 openssh-server
