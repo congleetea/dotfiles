@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: mongodb_pool:find/3 
-# key: mongodb_pool_find3 
+# key: mymongodb_pool_find3 
 # --
 %% mongodb_pool:find/3
 mongodb_pool:find({global, pool1},

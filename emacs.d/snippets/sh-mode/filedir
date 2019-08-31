@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: the directory this file in
-# key: filedir 
+# key: myfiledir 
 # --
 
 ${1}_DIR=$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd)

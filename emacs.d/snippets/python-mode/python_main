@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: python main function
-# key: pmain
+# key: mypmain
 # --
 
 def main():

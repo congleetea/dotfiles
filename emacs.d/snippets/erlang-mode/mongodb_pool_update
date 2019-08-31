@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: mongodb_pool:update/4 
-# key: mongodb_pool:update
+# key: mymongodb_pool:update
 # --
 
 mongodb_pool:update({global, pool1},

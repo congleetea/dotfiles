@@ -131,6 +131,7 @@ export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 # [ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
 
 #########################################################
+LC_TIME=en_US.UTF-8 
 alias c="clear"
 # alias e="LC_CTYPE=zh_CN.UTF-8 emacs &"
 alias e="emacs -nw"
@@ -193,7 +194,6 @@ function cpwd() {
 function pdf() {
     zathura $1 & 
 }
-
 alias unzip="unzip -O CP936 "
 alias rm="trash"
 alias sshi="ssh-keygen -f "$HOME/.ssh/known_hosts" -R 192.168.31.200 && ssh "

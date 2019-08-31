@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: config pymongo 
-# key: pymongo  
+# key: mypymongo  
 # --
 
 from pymongo import MongoClient

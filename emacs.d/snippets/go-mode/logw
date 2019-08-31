@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: log.Warnf 
-# key: logw 
+# key: mylogw 
 # --
 log.Warnf("$1", )

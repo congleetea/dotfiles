@@ -1,0 +1,8 @@
+# name: install target 
+# key: myinstalltarget
+# --
+
+install(TARGETS $1 
+        RUNTIME DESTINATION $2 
+        LIBRARY DESTINATION $3 
+        ARCHIVE DESTINATION $4)

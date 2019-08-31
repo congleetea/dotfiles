@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: try .. except ... 
-# key: tryexcept 
+# key: mytryexcept 
 # --
 try:
     ()

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: sed to replace in the dir 
-# key: sed 
+# key: mysed 
 # --
 sed -i "s/${1}/${2}/g" ${3} grep ${1} -rl . ${3}
 

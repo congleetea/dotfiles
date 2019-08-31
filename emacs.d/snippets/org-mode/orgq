@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: orgq
-# key: orgq 
+# key: myorgq 
 # --
 #+BEGIN_QUOTE
 $1

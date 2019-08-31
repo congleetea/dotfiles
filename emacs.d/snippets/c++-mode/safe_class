@@ -1,0 +1,28 @@
+# name: delete class 
+# key: mydeleteclass 
+# --
+
+template <class T>
+class safe_class {
+ public:
+  safe_class(){
+    has_data_ = false; 
+  }
+  bool check() const {
+    return has_data_;
+  }
+  void set(T &data) {
+    data_ = data;
+  }
+  T get() {
+    T ret;
+    std::lock_guard<std::mutex> lock(mutex_);
+    has_data_ = false;
+    ret = data_;
+    return ret;
+  }
+ private:
+  T data_;
+  std::atomic_bool has_data_;
+  std::mutex mutex_;
+}

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: ditaa for org-mode 
-# key: orgditaa 
+# key: myorgditaa 
 # --
 #+BEGIN_SRC ditaa :file ./images/$1.png  :cmdline -charset UTF-8 -r -s 0.8
 $2

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: doc and spec of function
-# key: edoc
+# key: myedoc
 # --
 %% ===================================================================
 %% @doc $1 

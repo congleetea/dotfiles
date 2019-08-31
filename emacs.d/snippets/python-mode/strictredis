@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: create redis connection 
-# key: strictredis 
+# key: mystrictredis 
 # --
 import redis
 
