@@ -1,0 +1,8 @@
+# name: globalproperty 
+# key: myglobalproperty 
+# --
+
+define_property(GLOBAL PROPERTY $1xxx BRIEF_DOCS "$2comment"
+    FULL_DOCS "")
+set_property(GLOBAL APPEND PROPERTY $1xxx $3target)
+get_property($4var GLOBAL PROPERTY $1xxx)
