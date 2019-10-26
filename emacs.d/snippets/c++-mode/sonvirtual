@@ -1,0 +1,5 @@
+# name: derived virtual function
+# key: mysonvirtual
+# --
+
+virtual $1() override;

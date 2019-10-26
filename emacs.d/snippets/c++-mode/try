@@ -1,5 +1,6 @@
-# name: try 
-# key: mytry 
+# name: try
+# key: mytry
+>>>>>>> feat(snippets): modify some snippets.
 # --
 
 try {

@@ -108,28 +108,31 @@ alias noproxy='unset http_proxy;unset HTTPS_PROXY;unset HTTP_PROXY;unset FTP_PRO
 # export JAVA_HOME=/usr/local/jdk1.8.0
 # export JRE_HOME=${JAVA_HOME}/jre
 # export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-export PATH=${JAVA_HOME}/bin:$PATH
-export GTAGSCONF=/usr/local/share/gtags/gtags.conf
-export GTAGSLABEL=ctags gtags
-export GOROOT=/usr/local/go
-export GOPATH=/home/${USER}/gitlab/go
-export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
+# export PATH=${JAVA_HOME}/bin:$PATH
+# export GTAGSCONF=/usr/local/share/gtags/gtags.conf
+# export GTAGSLABEL=ctags gtags
+# export GOROOT=/usr/local/go
+# export GOPATH=/home/${USER}/gitlab/go
+# export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
 
-#if [ -d /opt/google/protobuf ];then
-#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
-#    export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
-#    export PATH=$PATH:/opt/google/protobuf/bin/
-#    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
-#    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
-#    export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
-#fi
+if [ -d /opt/google/protobuf ];then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
+    export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
+    export PATH=$PATH:/opt/google/protobuf/bin/
+    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
+    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
+    export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
+fi
 
 ## for ros
+export G2O_DIR=/usr/local/lib
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src 
 [ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
-[ -f ~/gitlab/catkin_ws/install_isolated/setup.zsh ] && source ~/gitlab/catkin_ws/install_isolated/setup.zsh
-# [ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
-
+# [ -f ~/gitlab/catkin_ws/install_isolated/setup.zsh ] && source ~/gitlab/catkin_ws/install_isolated/setup.zsh
+[ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
+# cd /opt/rti.com/rti_connext_dds-5.3.1/resource/scripts && source ./rtisetenv_x64Linux3gcc5.4.0.bash; cd -
+# source ~/ros2_install/ros2-linux/setup.zsh
+# source ~/gitlab/ros2_ws/install/setup.zsh
 #########################################################
 LC_TIME=en_US.UTF-8 
 alias c="clear"

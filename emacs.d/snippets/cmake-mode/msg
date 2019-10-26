@@ -1,4 +1,4 @@
-# name: cmake message 
+# name: cmake message
 # key: mymsg 
 # --
 MESSAGE(STATUS $1)
