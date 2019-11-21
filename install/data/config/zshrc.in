@@ -133,6 +133,7 @@ export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 # cd /opt/rti.com/rti_connext_dds-5.3.1/resource/scripts && source ./rtisetenv_x64Linux3gcc5.4.0.bash; cd -
 # source ~/ros2_install/ros2-linux/setup.zsh
 # source ~/gitlab/ros2_ws/install/setup.zsh
+alias myws="source ~/gitlab/my_ws/devel/setup.zsh"
 #########################################################
 LC_TIME=en_US.UTF-8 
 alias c="clear"
