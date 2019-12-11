@@ -59,7 +59,7 @@ plugins=(git git-flow-avh autojump)
 
 export PATH=$PATH:/home/${USER}/gitlab/egodeps/r16_toolchain/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
 export STAGING_DIR=""
- 
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -126,7 +126,7 @@ fi
 
 ## for ros
 export G2O_DIR=/usr/local/lib
-export ROS_WORKSPACE=~/gitlab/catkin_ws/src 
+export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 [ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
 # [ -f ~/gitlab/catkin_ws/install_isolated/setup.zsh ] && source ~/gitlab/catkin_ws/install_isolated/setup.zsh
 [ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
@@ -135,7 +135,7 @@ export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 # source ~/gitlab/ros2_ws/install/setup.zsh
 alias myws="source ~/gitlab/my_ws/devel/setup.zsh"
 #########################################################
-LC_TIME=en_US.UTF-8 
+LC_TIME=en_US.UTF-8
 alias c="clear"
 # alias e="LC_CTYPE=zh_CN.UTF-8 emacs &"
 alias e="emacs -nw"
@@ -184,11 +184,16 @@ function ginit() {
 
 function cm() {
   nowdir=$PWD
-  cd /home/$USER/gitlab/catkin_ws && catkin_make -j4 && cd $nowdir
+ {
+    cd /home/$USER/gitlab/catkin_ws && catkin_make -j2
+    cd $nowdir
+ } || {
+    cd $nowdir
+ }
 }
 
 function gstyle() {
-  astyle --options=/home/$USER/gitlab/dotfiles/configs/astylerc --preserve-date $* 
+  astyle --options=/home/$USER/gitlab/dotfiles/configs/astylerc --preserve-date $*
 }
 
 function cpwd() {
@@ -196,8 +201,12 @@ function cpwd() {
 }
 
 function pdf() {
-    zathura $1 & 
+    zathura $1 &
 }
 alias unzip="unzip -O CP936 "
 alias rm="trash"
 alias sshi="ssh-keygen -f "$HOME/.ssh/known_hosts" -R 192.168.31.200 && ssh "
+
+export TURTLEBOT3_MODEL=burger
+export ROS_IP=192.168.1.14
+export ROS_MASTER_URI=http://192.168.1.5:11311
