@@ -11,8 +11,6 @@
 --break-after-logical
 --pad-oper
 --unpad-paren
---break-blocks
---pad-header
 --suffix=none
 --indent-switches
 --max-code-length=80

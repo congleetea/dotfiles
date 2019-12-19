@@ -185,7 +185,7 @@ function ginit() {
 function cm() {
   nowdir=$PWD
  {
-    cd /home/$USER/gitlab/catkin_ws && catkin_make -j2
+    cd /home/$USER/gitlab/catkin_ws && catkin_make -j8
     cd $nowdir
  } || {
     cd $nowdir
