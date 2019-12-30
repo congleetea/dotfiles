@@ -22,6 +22,7 @@
     "ae"   'end-of-defun
     "af"   'mark-defun
     "aH"   'hs-hide-all
+    "ai"   'astyle-format-code
     "aS"  'hs-show-all
     "ah"  'hs-hide-block
     "as"  'hs-show-block

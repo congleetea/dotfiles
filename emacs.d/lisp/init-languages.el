@@ -40,6 +40,20 @@
   (let ((bpr-process-directory path))
     (bpr-spawn "global -uv")))
 
+;; astyle --options=/home/$USER/gitlab/dotfiles/configs/astylerc --preserve-date $*
+
+
+(global-auto-revert-mode t)
+(defun astyle-format-code ()
+ "Format current buffer"
+ (interactive)
+ (setq format-command (format "astyle  --options=/home/$USER/gitlab/dotfiles/configs/astylerc " ))
+ (let ((file (buffer-file-name)))
+  (save-excursion
+    (shell-command-to-string (format "%s %s" format-command file))
+    (message "Code formatted"))))
+(provide 'init-astyle)
+
 ;;--------------------------------------------------------------
 ;; electric-mode
 ;;--------------------------------------------------------------
