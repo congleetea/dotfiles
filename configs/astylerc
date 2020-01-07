@@ -10,6 +10,7 @@
 --align-reference=name
 --break-after-logical
 --pad-oper
+--pad-header
 --unpad-paren
 --suffix=none
 --indent-switches

@@ -124,16 +124,6 @@ if [ -d /opt/google/protobuf ];then
     export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
 fi
 
-## for ros
-export G2O_DIR=/usr/local/lib
-export ROS_WORKSPACE=~/gitlab/catkin_ws/src
-[ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
-# [ -f ~/gitlab/catkin_ws/install_isolated/setup.zsh ] && source ~/gitlab/catkin_ws/install_isolated/setup.zsh
-[ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
-# cd /opt/rti.com/rti_connext_dds-5.3.1/resource/scripts && source ./rtisetenv_x64Linux3gcc5.4.0.bash; cd -
-# source ~/ros2_install/ros2-linux/setup.zsh
-# source ~/gitlab/ros2_ws/install/setup.zsh
-alias myws="source ~/gitlab/my_ws/devel/setup.zsh"
 #########################################################
 LC_TIME=en_US.UTF-8
 alias c="clear"
@@ -164,10 +154,12 @@ alias dc="cd ~/Documents"
 alias dt="cd ~/Desktop"
 alias say="espeak"
 alias mj="make -j4"
+alias myws="source ~/gitlab/my_ws/devel/setup.zsh"
+
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 function seddir() { sed -i "s/$1/$2/g" `grep $1 -rl ./` }
-
+function jws() { cd ~/gitlab/catkin_ws/src }
 # usage: cd your_project && ginit yourname youremail
 function ginit() {
     if [ -z $1 -a -z $2 ];then
@@ -185,17 +177,29 @@ function ginit() {
 function cm() {
   nowdir=$PWD
   {
-    cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCATKIN_WHITELIST_PACKAGES=""
+    cd /home/$USER/gitlab/catkin_ws && catkin_make -j8
+    # cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCATKIN_WHITELIST_PACKAGES=""
     cd $nowdir
   } || {
     cd $nowdir
   }
 }
 
+function cmi() {
+  nowdir=$PWD
+  {
+    cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros install
+    cd $nowdir
+  } || {
+    cd $nowdir
+  }
+}
+
+
 function cmb() {
   nowdir=$PWD
   {
-    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCATKIN_WHITELIST_PACKAGES="$*" install
+    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros -DCATKIN_WHITELIST_PACKAGES="$*" install
   } || {
     cd $nowdir
   }
@@ -204,9 +208,21 @@ function cmb() {
 function cmh() {
   nowdir=$PWD
   {
-    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCATKIN_BLACKLIST_PACKAGES="$*" install
+    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros -DCATKIN_BLACKLIST_PACKAGES="$*" install
   } || {
     cd $nowdir
+  }
+}
+
+function packet_ros {
+  nowdir=$PWD 
+  { 
+    if [ ! -d "/home/muyuan/debs" ]; then
+       mkdir -p /home/muyuan/debs
+    fi
+    echo "PACKAGE NAME: $1"
+    echo "PACKAGE VERSION: $2"
+    cd /home/muyuan/ && ./packet.sh $1 ros $2
   }
 }
 
@@ -222,10 +238,19 @@ function pdf() {
     zathura $1 &
 }
 alias unzip="unzip -O CP936 "
-alias rm="trash"
-alias sshi="ssh-keygen -f "$HOME/.ssh/known_hosts" -R 192.168.31.200 && ssh "
+alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
 
+## for ros
+export G2O_DIR=/usr/local/lib
+[ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
+[ -f /home/muyuan/ros/setup.zsh ] && source /home/muyuan/ros/setup.zsh
+[ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
+export ROS_WORKSPACE=~/gitlab/catkin_ws/src
+export ROS_PACKAGE_PATH=/home/congleetea/gitlab/catkin_ws/src:/home/muyuan/ros/share:/opt/ros/kinetic/share
 export TURTLEBOT3_MODEL=burger
 # export ROS_IP=192.168.1.3
-export ROS_IP=192.168.1.14
-export ROS_MASTER_URI=http://192.168.1.5:11311
+# export ROS_IP=192.168.1.14
+# export ROS_MASTER_URI=http://192.168.1.2:11311
+
+
+alias rm="trash"
