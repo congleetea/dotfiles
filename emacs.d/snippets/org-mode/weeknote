@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: weeknote 
+# key: weeknote 
+# --
+
+#+TITLE:  ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR: `(user-full-name)`
+#+EMAIL:  `user-mail-address`
+#+DATE:   `(format-time-string "%Y %b %d")`
+#+OPTIONS: ^:nil
+
+
+* 本周计划
+
+  | 任务 | 计划起始时间 | 完成情况 |
+  |------+--------------+----------|
+  |      |              |          |
+
+* 项目跟踪
+
+  | 项目 | 事项 | 备注 | 状态 |
+  |------+------+------+------|
+  |      |      |      |      |
+
+* 实现思路
