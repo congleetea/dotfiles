@@ -188,5 +188,5 @@ function git-branch-prompt {
 PS1="\u@\h \[\033[0;36m\]\W\[\033[0m\]\[\033[0;32m\]\$(git-branch-prompt)\[\033[0m\] \$ "
 alias rm="trash"
 
-# export ROS_IP=192.168.1.3
-# export ROS_MASTER_URI=http://192.168.1.2:11311
+export ROS_IP=192.168.1.4
+export ROS_MASTER_URI=http://192.168.1.2:11311

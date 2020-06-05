@@ -117,14 +117,14 @@ alias noproxy='unset http_proxy;unset HTTPS_PROXY;unset HTTP_PROXY;unset FTP_PRO
 # export GOPATH=/home/${USER}/gitlab/go
 # export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
 
-if [ -d /opt/google/protobuf ];then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
-    export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
-    export PATH=$PATH:/opt/google/protobuf/bin/
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
-    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
-    export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
-fi
+# if [ -d /opt/google/protobuf ];then
+#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
+#     export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
+#     export PATH=$PATH:/opt/google/protobuf/bin/
+#     export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
+#     export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
+#     export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
+# fi
 
 #########################################################
 LC_TIME=en_US.UTF-8
@@ -176,6 +176,7 @@ function ginit() {
     fi
 }
 
+alias cb="catkin build" 
 function cmn() {
   nowdir=$PWD
   {
@@ -186,7 +187,6 @@ function cmn() {
     cd $nowdir
   }
 }
-
 
 function cm() {
   nowdir=$PWD
@@ -253,19 +253,21 @@ function pdf() {
 }
 alias unzip="unzip -O CP936 "
 alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
-
+alias tow="cd /media/congleetea/OS/Users/congl/Documents"
 ## for ros
 export G2O_DIR=/usr/local/lib
-[ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
-# [ -f /home/muyuan/ros/setup.zsh ] && source /home/muyuan/ros/setup.zsh
-[ -f ~/gitlab/catkin_ws/install_isolated/setup.zsh ] && source ~/gitlab/catkin_ws/install_isolated/setup.zsh
-# [ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src
-# export ROS_PACKAGE_PATH=/home/congleetea/gitlab/catkin_ws/src:/home/muyuan/ros/share:/opt/ros/kinetic/share
 export TURTLEBOT3_MODEL=burger
-# export ROS_IP=192.168.1.9
-# export ROS_IP=192.168.1.14
-# export ROS_MASTER_URI=http://192.168.1.2:11311
 
+[ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
+[ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
+# [ -f ~/gitlab/catkin_ws/install/setup.zsh ] && source ~/gitlab/catkin_ws/install/setup.zsh
+# export ROS_PACKAGE_PATH=~/gitlab/catkin_ws/devel/share:$ROS_PACKAGE_PATH
+# export ROS_IP=192.168.1.5
+# export ROS_IP=192.168.1.10
+# export ROS_IP=192.168.1.14
+
+# export ROS_IP=192.168.1.14
+# export ROS_MASTER_URI=http://192.168.1.102:11311
 
 alias rm="trash"

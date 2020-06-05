@@ -1,10 +1,12 @@
 ## cp ./gitconfig ~/.gitconfig
 
 [user]
-	name = congleetea 
-	email = congleetea@gmail.com
+	name = 李选聪
+	email = 870880194@qq.com
 [core]
 	editor = vim  
 	quotepath = false
 [merge]
 	tool = vimdiff 
+[push]
+	default = simple
