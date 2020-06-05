@@ -117,15 +117,6 @@ alias noproxy='unset http_proxy;unset HTTPS_PROXY;unset HTTP_PROXY;unset FTP_PRO
 # export GOPATH=/home/${USER}/gitlab/go
 # export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
 
-# if [ -d /opt/google/protobuf ];then
-#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/google/protobuf/lib/
-#     export LIBRARY_PATH=$LIBRARY_PATH:/opt/google/protobuf/lib/
-#     export PATH=$PATH:/opt/google/protobuf/bin/
-#     export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/google/protobuf/include/
-#     export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/google/protobuf/include/
-#     export PKG_CONFIG_PATH=/opt/google/protobuf/lib/pkgconfig/
-# fi
-
 #########################################################
 LC_TIME=en_US.UTF-8
 alias c="clear"
@@ -177,16 +168,6 @@ function ginit() {
 }
 
 alias cb="catkin build" 
-function cmn() {
-  nowdir=$PWD
-  {
-    cd /home/$USER/gitlab/catkin_ws && catkin_make_isolated --install --use-ninja -j8
-    # cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCATKIN_WHITELIST_PACKAGES=""
-    cd $nowdir
-  } || {
-    cd $nowdir
-  }
-}
 
 function cm() {
   nowdir=$PWD
@@ -199,47 +180,6 @@ function cm() {
   }
 }
 
-function cmi() {
-  nowdir=$PWD
-  {
-    cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros install
-    cd $nowdir
-  } || {
-    cd $nowdir
-  }
-}
-
-
-function cmb() {
-  nowdir=$PWD
-  {
-    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros -DCATKIN_WHITELIST_PACKAGES="$*" install
-  } || {
-    cd $nowdir
-  }
-}
-
-function cmh() {
-  nowdir=$PWD
-  {
-    cd /home/$USER/gitlab/catkin_ws && rm -rf install && catkin_make -DCMAKE_INSTALL_PREFIX=/home/muyuan/ros -DCATKIN_BLACKLIST_PACKAGES="$*" install
-  } || {
-    cd $nowdir
-  }
-}
-
-function packet_ros {
-  nowdir=$PWD 
-  { 
-    if [ ! -d "/home/muyuan/debs" ]; then
-       mkdir -p /home/muyuan/debs
-    fi
-    echo "PACKAGE NAME: $1"
-    echo "PACKAGE VERSION: $2"
-    cd /home/muyuan/ && ./packet.sh $1 ros $2
-  }
-}
-
 function gstyle() {
   astyle --options=/home/$USER/gitlab/dotfiles/configs/astylerc --preserve-date $*
 }
@@ -248,13 +188,19 @@ function cpwd() {
     pwd | xclip -selection clipboard
 }
 
-function pdf() {
-    zathura $1 &
-}
 alias unzip="unzip -O CP936 "
 alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
 alias tow="cd /media/congleetea/OS/Users/congl/Documents"
 ## for ros
+if [ -d /opt/ros/rosdeps/protobuf ];then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
+    export LIBRARY_PATH=$LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
+    export PATH=$PATH:/opt/ros/rosdeps/protobuf/bin/
+    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
+    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
+    export PKG_CONFIG_PATH=/opt/ros/rosdeps/protobuf/lib/pkgconfig/
+fi
+
 export G2O_DIR=/usr/local/lib
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 export TURTLEBOT3_MODEL=burger
@@ -267,7 +213,7 @@ export TURTLEBOT3_MODEL=burger
 # export ROS_IP=192.168.1.10
 # export ROS_IP=192.168.1.14
 
-# export ROS_IP=192.168.1.14
-# export ROS_MASTER_URI=http://192.168.1.102:11311
+# export ROS_IP=192.168.1.100
+# export ROS_MASTER_URI=http://192.168.1.2:11311
 
 alias rm="trash"
