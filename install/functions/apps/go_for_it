@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function install_go_for_it {
+	NAME="go-for-it"
+	PACKAGE="go-for-it"
+	PPA="mank319/go-for-it"
+    if [ $? = 0 ]; then
+		# Install package
+		install_package "$NAME" "$PACKAGE" install_custom_app
+	else
+		# Cancelled
+		echo_message info "Installation of $NAME cancelled."
+		# return
+		install_custom_app
+	fi
+}
