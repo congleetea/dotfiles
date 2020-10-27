@@ -140,14 +140,13 @@ alias aptshow="sudo apt show "
 alias ninstall="sudo npm install -g"
 alias pinstall="sudo pip install"
 alias ot="nautilus"
-alias ycmd="/home/${USER}/gitlab/dotfiles/emacs.d/vendor/YCM-Generator/config_gen.py ./"
+alias ycmd="${HOME}/gitlab/dotfiles/emacs.d/vendor/YCM-Generator/config_gen.py ./"
 alias szsh="source ~/.zshrc"
 alias dl="cd ~/Downloads"
 alias dc="cd ~/Documents"
 alias dt="cd ~/Desktop"
 alias say="espeak"
 alias mj="make -j4"
-alias myws="source ~/gitlab/my_ws/devel/setup.zsh"
 
 #mkdir and cd
 function mkcd() { mkdir -p "$@" && cd "$_"; }
@@ -168,12 +167,11 @@ function ginit() {
 }
 
 alias cb="catkin build" 
-
+alias catkin_changelog="catkin_generate_changelog --skip-merges"
 function cm() {
   nowdir=$PWD
   {
     cd /home/$USER/gitlab/catkin_ws && catkin_make -j8
-    # cd /home/$USER/gitlab/catkin_ws && catkin_make -j8 -DCATKIN_WHITELIST_PACKAGES=""
     cd $nowdir
   } || {
     cd $nowdir
@@ -192,28 +190,23 @@ alias unzip="unzip -O CP936 "
 alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
 alias tow="cd /media/congleetea/OS/Users/congl/Documents"
 ## for ros
-if [ -d /opt/ros/rosdeps/protobuf ];then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
-    export LIBRARY_PATH=$LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
-    export PATH=$PATH:/opt/ros/rosdeps/protobuf/bin/
-    export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
-    export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
-    export PKG_CONFIG_PATH=/opt/ros/rosdeps/protobuf/lib/pkgconfig/
-fi
+# if [ -d /opt/ros/rosdeps/protobuf ];then
+#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
+#     export LIBRARY_PATH=$LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
+#     export PATH=$PATH:/opt/ros/rosdeps/protobuf/bin/
+#     export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
+#     export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
+#     export PKG_CONFIG_PATH=/opt/ros/rosdeps/protobuf/lib/pkgconfig/
+# fi
+
+export PATH=$PATH:$HOME/bin:/var/lib/gems/1.8/bin
 
 export G2O_DIR=/usr/local/lib
-export ROS_WORKSPACE=~/gitlab/catkin_ws/src
 export TURTLEBOT3_MODEL=burger
 
-[ -f /opt/ros/kinetic/setup.zsh ] && source /opt/ros/kinetic/setup.zsh
-[ -f ~/gitlab/catkin_ws/devel/setup.zsh ] && source ~/gitlab/catkin_ws/devel/setup.zsh
-# [ -f ~/gitlab/catkin_ws/install/setup.zsh ] && source ~/gitlab/catkin_ws/install/setup.zsh
-# export ROS_PACKAGE_PATH=~/gitlab/catkin_ws/devel/share:$ROS_PACKAGE_PATH
-# export ROS_IP=192.168.1.5
-# export ROS_IP=192.168.1.10
-# export ROS_IP=192.168.1.14
-
-# export ROS_IP=192.168.1.100
-# export ROS_MASTER_URI=http://192.168.1.2:11311
+source /opt/ros/kinetic/setup.zsh
+source ~/gitlab/catkin_ws/devel/setup.zsh
+export ROS_WORKSPACE=~/gitlab/catkin_ws/src
+#export ROS_MASTER_URI=http://192.168.1.1:11311
 
 alias rm="trash"
