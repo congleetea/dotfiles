@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: for array 
+# key: myforarray 
+# --
+
+$1=(1 2)
+
+for $2 in \$\{$1[@]\}
+do
+    echo "<<<< \$$2"
+done
