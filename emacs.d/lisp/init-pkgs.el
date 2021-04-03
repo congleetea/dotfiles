@@ -131,10 +131,10 @@
                         (js-mode "{" "}" "/[*/]" nil)
                         (javascript-mode  "{" "}" "/[*/]" nil))))))
 
-(use-package highlight-symbol
-  :defer t
-  :ensure t
-  :config (setq-default highlight-symbol-idle-delay 1.5))
+;; (use-package highlight-symbol
+;;   :defer t
+;;   :ensure t
+;;   :config (setq-default highlight-symbol-idle-delay 1.5))
 
 (use-package flycheck
   :ensure t
@@ -221,20 +221,20 @@
         (evil-emacs-state 1)
       (evil-normal-state 1))))
 
-(use-package git-gutter
-  :ensure t
-  :defer t
-  :init (global-git-gutter-mode t)
-  :config
-  (progn
-    (setq git-gutter:window-width 2)
-    (setq git-gutter:modified-sign "==")
-    (setq git-gutter:added-sign "++")
-    (setq git-gutter:deleted-sign "--")
-    (set-face-foreground 'git-gutter:added "#daefa3")
-    (set-face-foreground 'git-gutter:deleted "#FA8072")
-    (set-face-foreground 'git-gutter:modified "#b18cce")
-    ))
+;(use-package git-gutter
+;  :ensure t
+;  :defer t
+;  :init (global-git-gutter-mode t)
+;  :config
+;  (progn
+;    (setq git-gutter:window-width 2)
+;    (setq git-gutter:modified-sign "==")
+;    (setq git-gutter:added-sign "++")
+;    (setq git-gutter:deleted-sign "--")
+;    (set-face-foreground 'git-gutter:added "#daefa3")
+;    (set-face-foreground 'git-gutter:deleted "#FA8072")
+;    (set-face-foreground 'git-gutter:modified "#b18cce")
+;    ))
 
 (use-package projectile
   :defer t

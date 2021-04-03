@@ -87,7 +87,6 @@
 ;; cc-mode
 ;;--------------------------------------------------------------
 
-
 (use-package cc-mode
   :config
   (progn
@@ -123,7 +122,7 @@
 (use-package company-c-headers
   :init
   (add-to-list 'company-backends 'company-c-headers)
-  (add-to-list 'company-c-headers-path-system "/usr/include/c++/7/"))
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/8/"))
 
 ;;---------------------------------------------------------------
 ;; Protobuf
@@ -230,35 +229,6 @@
              (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
 
 ;;----------------------------------------------------------------------------
-;; Golang
-;; go get github.com/rogpeppe/godef
-;; go get -u github.com/golang/lint/golint
-;; go get -u github.com/nsf/gocode
-;;----------------------------------------------------------------------------
-(use-package company-go
-             :ensure t
-             :defer t
-             :init
-             (with-eval-after-load 'company
-                                   (add-to-list 'company-backends 'company-go)))
-
-(use-package go-eldoc
-             :ensure t
-             :defer
-             :init
-             (add-hook 'go-mode-hook 'go-eldoc-setup))
-
-(use-package go-mode
- :config
- (bind-keys :map go-mode-map
-  ("M-." . godef-jump)
-  ("M-," . pop-tag-mark)
-  )
- (add-hook 'go-mode-hook '(lambda () (setq tab-width 2)))
- (setq gofmt-command "goimports")
- (add-hook 'before-save-hook 'gofmt-before-save))
-
-;;----------------------------------------------------------------------------
 ;; other programming languages
 ;;----------------------------------------------------------------------------
 (use-package markdown-mode
@@ -334,9 +304,9 @@
   :diminish eldoc-mode
   :init (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
 
-;;(use-package flycheck-ycmd
-;;  :commands (flycheck-ycmd-setup)
-;;  :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
+(use-package flycheck-ycmd
+ :commands (flycheck-ycmd-setup)
+ :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
 
 (provide 'init-languages)
 ;;; init-languages.el ends here

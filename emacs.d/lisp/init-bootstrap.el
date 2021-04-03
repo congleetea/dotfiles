@@ -70,7 +70,7 @@
 
 ;;; essential libs
 (use-package s        :ensure t :defer t)
-(use-package cl       :ensure t :defer t)
+(use-package cl-lib   :ensure t :defer t)
 (use-package ht       :ensure t :defer t)
 (use-package git      :ensure t :defer t)
 (use-package dash     :ensure t :defer t)
