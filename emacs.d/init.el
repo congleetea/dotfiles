@@ -29,43 +29,44 @@
 
 ;;; install packages
 (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                         ("melpa" . "http://melpa.org/packages/")
                          ("org" . "http://elpa.emacs-china.org/org/")))
 
 ;; use proxy if repository is not access.
-;; (setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;;                            ("http" . "127.0.0.1:8123")
-;;                            ("https" . "127.0.0.1:8123")
-;;                            ))
+(setq url-proxy-services '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+                           ("http" . "127.0.0.1:2340")
+                           ("https" . "127.0.0.1:2340")
+                           ))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
 (setq use-package-always-ensure t)
-
+;; (xterm-mouse-mode t)  ;; 鼠标
 (eval-when-compile (require 'use-package))
-
-;;; Require my custom configs. 
+  
+;; evil-viaualstar: on string world, hit * to search that selection forward, or # to se    arch that selection backward.
+;; (use-package evil-visualstar :config (global-evil-visualstar-mode t))
+;; Require my custom configs. 
 (require 'init-bootstrap)
 (require 'init-utils)
 (require 'init-platform)
 (require 'init-pkgs)
 (require 'init-evil)
-(require 'init-org)
 (require 'init-languages)
+(require 'init-org)
 (require 'init-maps)
 
 
 (provide 'init)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (org-evil yasnippet yaml-mode which-key web-mode use-package uimage telephone-line systemd swiper rainbow-mode rainbow-delimiters racket-mode paredit org-page neotree multiple-cursors monokai-theme monitor markdown-mode magit lua-mode js2-mode hippie-exp-ext highlight-symbol helm-projectile helm-ag google-c-style go-eldoc git-gutter geiser flycheck evil-surround evil-leader evil-indent-textobject dockerfile-mode docker dired-k diminish company-go company-c-headers comment-dwim-2 color-identifiers-mode cmake-mode bpr avy anzu ansible ag ac-slime))))
+ '(package-selected-packages '(use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
