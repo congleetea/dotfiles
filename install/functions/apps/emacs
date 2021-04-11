@@ -10,7 +10,7 @@ function install_emacs {
     Dest=$HOME/.emacs.d
     link $Src $Dest
     echo_message info "Install dependencies of emacs."
-    superuser_do "sudo apt-get install -y exuberant-ctags build-essential texinfo libx11-dev libxpm-dev libgif-dev openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex"
+    superuser_do "sudo apt-get install -y exuberant-ctags build-essential texinfo libx11-dev libxpm-dev libgif-dev openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex libgnutls-dev"
     if [ ! -f $PKGS_DIR/emacs-${EMACS_VER}.tar.gz ];then
         cd $PKGS_DIR && curl -O http://mirrors.ustc.edu.cn/gnu/emacs/emacs-${EMACS_VER}.tar.gz
     fi

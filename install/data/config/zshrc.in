@@ -56,11 +56,8 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-flow-avh autojump)
-[[ -s /home/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /home/$USER/.autojump/etc/profile.d/autojump.sh
-# User configuration
 
-export PATH=$PATH:/home/${USER}/gitlab/egodeps/r16_toolchain/prebuilt/gcc/linux-x86/arm/toolchain-sunxi-musl/toolchain/bin
-export STAGING_DIR=""
+# User configuration
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,19 +100,9 @@ export NVM_DIR="/home/${USER}/.nvm"
 
 setxkbmap -option ctrl:swapcaps
 
-## use polipo for proxy, default port is 8123.
-alias proxy='export http_proxy=http://127.0.0.1:8123;export HTTPS_PROXY=$http_proxy;export HTTP_PROXY=$http_proxy;export FTP_PROXY=$http_proxy;export https_proxy=$http_proxy;export ftp_proxy=$http_proxy;'
-alias noproxy='unset http_proxy;unset HTTPS_PROXY;unset HTTP_PROXY;unset FTP_PROXY;unset https_proxy;unset ftp_proxy'
-
-# export JAVA_HOME=/usr/local/jdk1.8.0
-# export JRE_HOME=${JAVA_HOME}/jre
-# export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-# export PATH=${JAVA_HOME}/bin:$PATH
-# export GTAGSCONF=/usr/local/share/gtags/gtags.conf
-# export GTAGSLABEL=ctags gtags
-# export GOROOT=/usr/local/go
-# export GOPATH=/home/${USER}/gitlab/go
-# export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
+export GOROOT=/usr/local/go
+export GOPATH=/home/${USER}/gitlab/go
+export PATH=$PATH:/usr/local/go/bin:/home/${USER}/gitlab/go/bin
 
 #########################################################
 LC_TIME=en_US.UTF-8
@@ -140,6 +127,7 @@ alias aptshow="sudo apt show "
 alias ninstall="sudo npm install -g"
 alias pinstall="sudo pip install"
 alias ot="nautilus"
+alias ott="nautilus ."
 alias ycmd="${HOME}/gitlab/dotfiles/emacs.d/vendor/YCM-Generator/config_gen.py ./"
 alias szsh="source ~/.zshrc"
 alias dl="cd ~/Downloads"
@@ -152,6 +140,7 @@ alias mj="make -j4"
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 function seddir() { sed -i "s/$1/$2/g" `grep $1 -rl ./` }
 function jws() { cd ~/gitlab/catkin_ws/src }
+function mssh() { ssh -p 22 muyuan@$1 }
 # usage: cd your_project && ginit yourname youremail
 function ginit() {
     if [ -z $1 -a -z $2 ];then
@@ -186,27 +175,43 @@ function cpwd() {
     pwd | xclip -selection clipboard
 }
 
+function proxy() {
+	export http_proxy="127.0.0.1:2340"
+	export https_proxy="127.0.0.1:2340"
+}
+
+function noproxy() {
+	unset http_proxy 
+	unset https_proxy 
+}
+
+alias aptversion="apt-cache madison "
 alias unzip="unzip -O CP936 "
 alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
 alias tow="cd /media/congleetea/OS/Users/congl/Documents"
-## for ros
-# if [ -d /opt/ros/rosdeps/protobuf ];then
-#     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
-#     export LIBRARY_PATH=$LIBRARY_PATH:/opt/ros/rosdeps/protobuf/lib/
-#     export PATH=$PATH:/opt/ros/rosdeps/protobuf/bin/
-#     export C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
-#     export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/ros/rosdeps/protobuf/include/
-#     export PKG_CONFIG_PATH=/opt/ros/rosdeps/protobuf/lib/pkgconfig/
-# fi
 
-export PATH=$PATH:$HOME/bin:/var/lib/gems/1.8/bin
+if [ -f /usr/share/autojump/autojump.zsh ];then
+	source /usr/share/autojump/autojump.zsh
+fi
 
-export G2O_DIR=/usr/local/lib
-export TURTLEBOT3_MODEL=burger
-
-source /opt/ros/kinetic/setup.zsh
-source ~/gitlab/catkin_ws/devel/setup.zsh
+##　For ROS
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src
-#export ROS_MASTER_URI=http://192.168.1.1:11311
+if [ -f /opt/ros/kinetic/setup.zsh ];then
+	source /opt/ros/kinetic/setup.zsh
+fi
 
+if [ -f ~/gitlab/catkin_ws/devel/setup.zsh ];then
+	source ~/gitlab/catkin_ws/devel/setup.zsh
+fi
+# source /home/muyuan/muyuanros/ros_app/setup.zsh
+# export ROS_IP=192.168.1.159
+# export ROS_MASTER_URI=http://192.168.1.2:11311
+
+## For Golang
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/gitlab/go
+export PATH=$PATH:/usr/local/go/bin:$HOME/gitlab/go/bin
+
+
+################################# end ########################
 alias rm="trash"

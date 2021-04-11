@@ -104,7 +104,7 @@ function install(){
             if [ ! -d "/home/$USER/autojump" ];then
             	git clone https://github.com/wting/autojump.git ~/autojump
 	    fi
-            cd ~/autojump && ./install.py
+            cd ~/autojump && /bin/python2 ./install.py
             # echo "[[ -s /home/${USER}/.autojump/etc/profile.d/autojump.sh ]] && source /home/${USER}/.autojump/etc/profile.d/autojump.sh" >> ~/.zshrc
             rm -rf ~/autojump
 
@@ -112,6 +112,11 @@ function install(){
             	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
             fi
             ~/.fzf/install
+            if [ ! -d "/home/$USER/.zsh-autosuggestions" ];then
+            	git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions ~/.fzf
+            fi
+            ~/.fzf/install
+
             source ~/.zshrc
         elif [ $sw == "emacs" ];then
             if [ ! -f ${SWDIR}/emacs-${EMACS_VER}.tar.gz ];then

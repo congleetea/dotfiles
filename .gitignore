@@ -5,7 +5,7 @@ install/pkgs
 abbrev_defs
 auto-save-list
 docsets
-elpa
+elpa*
 projectile-bookmarks.eld
 undo-tree-history
 projectile.cache

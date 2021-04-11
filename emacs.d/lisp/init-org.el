@@ -13,9 +13,9 @@
              :defer t
              )
 
-(use-package grip-mode
-  :ensure t
-  :hook ((markdown-mode org-mode) . grip-mode))
+;; (use-package grip-mode
+;;   :ensure t
+;;   :hook ((markdown-mode org-mode) . grip-mode))
 
 (setq org-plantuml-jar-path (expand-file-name "~/.emacs.d/vendor/plantuml.jar"))
 (setq org-ditaa-jar-path (expand-file-name "~/.emacs.d/vendor/ditaa0_9.jar"))
