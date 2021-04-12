@@ -196,8 +196,8 @@ fi
 
 ##　For ROS
 export ROS_WORKSPACE=~/gitlab/catkin_ws/src
-if [ -f /opt/ros/kinetic/setup.zsh ];then
-	source /opt/ros/kinetic/setup.zsh
+if [ -f /opt/ros/noetic/setup.zsh ];then
+	source /opt/ros/noetic/setup.zsh
 fi
 
 if [ -f ~/gitlab/catkin_ws/devel/setup.zsh ];then

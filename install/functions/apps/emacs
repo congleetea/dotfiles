@@ -2,7 +2,7 @@
 
 # Emacs 
 function install_emacs {
-    EMACS_VER=25.2
+    EMACS_VER=27.2
     GLOBAL_VER=6.5.7
     PKGS_DIR=$(pkgs_dir)
     ThisDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
@@ -10,7 +10,8 @@ function install_emacs {
     Dest=$HOME/.emacs.d
     link $Src $Dest
     echo_message info "Install dependencies of emacs."
-    superuser_do "sudo apt-get install -y exuberant-ctags build-essential texinfo libx11-dev libxpm-dev libgif-dev openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex libgnutls-dev"
+    # superuser_do "sudo apt-get install -y exuberant-ctags build-essential texinfo libx11-dev libxpm-dev libgif-dev openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex libgnutls-dev"
+    superuser_do "sudo apt-get install -y libxpm-dev libgnutls28-dev libncurses-dev libxaw7-dev xsel"
     if [ ! -f $PKGS_DIR/emacs-${EMACS_VER}.tar.gz ];then
         cd $PKGS_DIR && curl -O http://mirrors.ustc.edu.cn/gnu/emacs/emacs-${EMACS_VER}.tar.gz
     fi
@@ -33,27 +34,27 @@ function install_emacs {
     # echo "export GTAGSCONF=/usr/local/share/gtags/gtags.conf" >> ~/.zshrc
     # echo "export GTAGSLABEL=ctags gtags" >> ~/.zshrc
 
-    echo_message info "Install ycmd for emacs with C++/C."
-    if [ ! -d "${HOME}/.emacs.d/vendor/ycmd" ];then
-        cd $HOME/.emacs.d/vendor && git clone https://github.com/Valloric/ycmd.git
-    fi
-    if [ ! -d "${HOME}/.emacs.d/vendor/YCM-Generator" ];then
-        cd $HOME/.emacs.d/vendor && git clone https://github.com/rdnetto/YCM-Generator.git
-    fi
-    superuser_do "apt-get install -y libclang-3.8-dev clang-3.8"
-    if [ -e "/usr/bin/clang" ];then
-        superuser_do "unlink /usr/bin/clang"
-    fi
-    superuser_do "ln -s /usr/bin/clang-3.8 /usr/bin/clang"
+    # echo_message info "Install ycmd for emacs with C++/C."
+    # if [ ! -d "${HOME}/.emacs.d/vendor/ycmd" ];then
+    #     cd $HOME/.emacs.d/vendor && git clone https://github.com/Valloric/ycmd.git
+    # fi
+    # if [ ! -d "${HOME}/.emacs.d/vendor/YCM-Generator" ];then
+    #     cd $HOME/.emacs.d/vendor && git clone https://github.com/rdnetto/YCM-Generator.git
+    # fi
+    # superuser_do "apt-get install -y libclang-3.8-dev clang-3.8"
+    # if [ -e "/usr/bin/clang" ];then
+    #     superuser_do "unlink /usr/bin/clang"
+    # fi
+    # superuser_do "ln -s /usr/bin/clang-3.8 /usr/bin/clang"
 
-    if [ -e "/usr/bin/clang++" ];then
-        superuser_do "unlink /usr/bin/clang++"
-    fi
-    superuser_do "ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
-    cd $HOME/.emacs.d/vendor/ycmd && git submodule update --init --recursive
-    cd $HOME/.emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
+    # if [ -e "/usr/bin/clang++" ];then
+    #     superuser_do "unlink /usr/bin/clang++"
+    # fi
+    # superuser_do "ln -s /usr/bin/clang++-3.8 /usr/bin/clang++"
+    # cd $HOME/.emacs.d/vendor/ycmd && git submodule update --init --recursive
+    # cd $HOME/.emacs.d/vendor/ycmd && ./build.py --clang-completer --system-libclang
 
-    echo_message info "Now you can execute command: ycmd in your project to generate .ycm_extra_conf.py, then enjoy it."
+    # echo_message info "Now you can execute command: ycmd in your project to generate .ycm_extra_conf.py, then enjoy it."
     
     rm -rf $PKGS_DIR/global-${GLOBAL_VER} $PKGS_DIR/emacs-${EMACS_VER}
     echo_message success "Succeed to install emacs and ycmd."
