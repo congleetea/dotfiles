@@ -2,21 +2,19 @@
 
 # Install Oh-my-zsh 
 function install_oh-my-zsh {
-    superuser_do "sudo apt-get install -y zsh autojump"
-    chsh -s /bin/zsh
-    if [ ! -d "$HOME/.oh-my-zsh" ];then
-        git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    fi
+    echo_message info ">>> Install zsh."
+    superuser_do "sudo apt-get install -y zsh"
+    echo_message info ">>> Download and install oh-my-zsh."
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     ThisDir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-    Src=$ThisDir/../../data/config/zshrc.in
+    echo_message info ">>> Link zshrc.in.sh to .zshrc."
+    Src=$ThisDir/../../data/config/zshrc.in.sh
     Dest=$HOME/.zshrc
-    link $Src $Dest
-    superuser_do "chsh -s /bin/zsh" 
-
-    if [ ! -d "$HOME/.fzf" ];then
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    if [ -f $Dest ]; then
+       rm $Dest
     fi
-    $HOME/.fzf/install --all
-    echo_message info "Source ~/.zshrc"
-    source ~/.zshrc
+    link $Src $Dest
+    echo_message info ">>> Change shell to zsh."
+    superuser_do "chsh -s /bin/zsh" 
+    echo_message info ">>> Change shell to zsh finished, Please open other terminator to continue."
 }

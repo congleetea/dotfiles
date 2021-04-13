@@ -42,10 +42,10 @@ function write_profile {
 	fi
 }
 
-# Configure bash profile by copying the 'bashrc.in' file to ~/.bashrc
+# Configure bash profile by copying the 'bashrc.in.sh' file to ~/.bashrc
 function write_bashrc {
 	# Check list
-	INPUT=$(dirname "$0")'/data/config/bashrc.in'
+	INPUT=$(dirname "$0")'/data/config/bashrc.in.sh'
 	# Draw window
 	if (eval `resize` && whiptail \
 		--title "Configure Bash" \

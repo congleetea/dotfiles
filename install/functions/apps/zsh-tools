@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Install zsh-tools 
+function install_zsh-tools {
+    echo_message info ">>> Install autojump fzf."
+    superuser_do "sudo apt-get install -y autojump fzf"
+    echo_message info ">>> Source ~/.zshrc"
+    source ~/.zshrc
+    echo_message info ">>> Source ~/.zshrc done, install finished."
+}

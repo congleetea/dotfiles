@@ -131,10 +131,10 @@
                         (js-mode "{" "}" "/[*/]" nil)
                         (javascript-mode  "{" "}" "/[*/]" nil))))))
 
-;; (use-package highlight-symbol
-;;   :defer t
-;;   :ensure t
-;;   :config (setq-default highlight-symbol-idle-delay 1.5))
+;; (use-package highlight-defined
+;;   :config
+;;   (progn
+;;     (add-hook'emacs-lisp-mode-hook 'highlight-defined-mode)))
 
 (use-package flycheck
   :ensure t

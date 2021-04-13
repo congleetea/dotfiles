@@ -28,8 +28,8 @@
 
 
 ;;; install packages
-(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://melpa.org/packages/")
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")
+			 ("gnu"   . "http://elpa.emacs-china.org/gnu/")
                          ("org" . "http://elpa.emacs-china.org/org/")))
 
 ;; use proxy if repository is not access.
