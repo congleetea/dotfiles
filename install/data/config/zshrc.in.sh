@@ -213,4 +213,5 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/gitlab/go/bin
 ################################# end ########################
 alias rm="trash"
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
