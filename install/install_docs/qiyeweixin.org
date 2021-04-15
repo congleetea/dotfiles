@@ -68,11 +68,5 @@
     #+BEGIN_SRC shell
       deepin-wine regedit msyh_config.reg
     #+END_SRC
-
-    安装图片库
-    #+BEGIN_SRC shell
-      sudo apt-get install libjpeg62:i386
-    #+END_SRC
-
     
     引用： https://blog.csdn.net/qq_18649781/article/details/87476043
