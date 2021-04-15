@@ -7,45 +7,72 @@
 * 概述
   Ubuntu 20.04 相比 16.04 有很大的改动，使用deep-wine安装企业微信也会有很多问题。
   这里总结安装过程中的问题。
-  
-#+BEGIN_SRC shell
-## 第一步：安装deepin-wine-for-ubuntu
-git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
-cd deepin-wine-for-ubuntu
-./install.sh
-## 下载企业微信、微信
-链接: https://pan.baidu.com/s/1r1UKMtImltNu6wEaqvSzdA 提取码: qgn4
-sudo dpkg -i deepin.com.***.deb安装
-## 企业微信乱码解决
-sudo gedit /opt/deepinwine/tools/run.sh
-## 修改WINE_CMD的值为：
-WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
-下载字体：
-链接: https://pan.baidu.com/s/1AG82SWt_TBDS1VdVYmp17A  密码: dv86
-unzip msyhttc.zip
-cp msyh.ttc ~/.deepinwine/Deepin-WXWork/drive_c/windows/Fonts/
-# 修改注册表
-sudo gedit ~/.deepinwine/Deepin-WXWork/system.reg
-## 修改下面两行的值
-"MS Shell Dlg"="msyh"
-"MS Shell Dlg 2"="msyh"
-# 修改注册表
-sudo gedit msyh_config.reg
-## 添加以下内容
-REGEDIT4
-[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
-"Lucida Sans Unicode"="msyh.ttc"
-"Microsoft Sans Serif"="msyh.ttc"
-"MS Sans Serif"="msyh.ttc"
-"Tahoma"="msyh.ttc"
-"Tahoma Bold"="msyhbd.ttc"
-"msyh"="msyh.ttc"
-"Arial"="msyh.ttc"
-"Arial Black"="msyh.ttc"
-# 注册
-deepin-wine regedit msyh_config.reg
-## 安装图片库
-sudo apt-get install libjpeg62:i386
-#+END_SRC
 
-https://blog.csdn.net/qq_18649781/article/details/87476043
+* 步骤
+** 安装deep-wine 
+   #+BEGIN_SRC shell
+     git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git ./deepin-wine-for-ubuntu 
+     cd ./deep-wine-for-ubuntu && /bin/bash ./install_2.8.22.sh
+   #+END_SRC
+   你会发现里面需要拉取的很多软件是 http://mirrors.aliyun.com 下面的，这个路径现
+   在已经失效了。我们把所有的mirrors.aliyun.com替换成http://packages.deepin.com
+   再重新执行./install_2.8.22.sh就可以了。记住ubuntu 20执行的不是./install.sh这
+   个文件。
+   
+** 安装企业微信 
+   #+BEGIN_SRC shell
+     http://packages.deepin.com/deepin/pool/non-free/d/deepin.com.weixin.work/deepin.com.weixin.work_2.8.10.2010deepin0_i386.deb
+     sudo dpkg -i ./deepin.com.weixin.work_2.8.10.2010deepin0_i386.deb
+   #+END_SRC
+   现在就可以启动企业微信了。
+
+** 一些可能的问题解决
+*** 汉字输入问题
+    sudo打开/opt/deepinwine/tools/run_v2.sh找到WINE_CMD处，改成：
+    #+BEGIN_SRC shell
+      WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
+    #+END_SRC
+
+    如果不行，需要增加一个字体msyh.ttc(可以自行在网上下载),把msyh.ttc放
+    到~/.deepinwine/Deepin-WXWork/drive_c/windows/Fonts/中。
+
+    修改注册表:
+    #+BEGIN_SRC shell
+      sudo gedit ~/.deepinwine/Deepin-WXWork/system.reg
+    #+END_SRC
+
+    修改下面两行的值
+    #+BEGIN_SRC text
+      "MS Shell Dlg"="msyh"
+      "MS Shell Dlg 2"="msyh"
+    #+END_SRC
+
+    #+BEGIN_SRC shell
+    sudo gedit msyh_config.reg
+    #+END_SRC
+
+    添加以下内容:
+    #+BEGIN_SRC text
+      REGEDIT4
+      [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
+      "Lucida Sans Unicode"="msyh.ttc"
+      "Microsoft Sans Serif"="msyh.ttc"
+      "MS Sans Serif"="msyh.ttc"
+      "Tahoma"="msyh.ttc"
+      "Tahoma Bold"="msyhbd.ttc"
+      "msyh"="msyh.ttc"
+      "Arial"="msyh.ttc"
+      "Arial Black"="msyh.ttc"
+    #+END_SRC
+    然后执行：
+    #+BEGIN_SRC shell
+      deepin-wine regedit msyh_config.reg
+    #+END_SRC
+
+    安装图片库
+    #+BEGIN_SRC shell
+      sudo apt-get install libjpeg62:i386
+    #+END_SRC
+
+    
+    引用： https://blog.csdn.net/qq_18649781/article/details/87476043
