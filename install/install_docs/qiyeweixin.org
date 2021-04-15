@@ -1,0 +1,51 @@
+#+TITLE:  安装企业微信 
+#+AUTHOR: Clare Lee
+#+EMAIL:  congleetea@gmail.com
+#+DATE:   2021 Apr 13
+#+OPTIONS: ^:nil
+
+* 概述
+  Ubuntu 20.04 相比 16.04 有很大的改动，使用deep-wine安装企业微信也会有很多问题。
+  这里总结安装过程中的问题。
+  
+#+BEGIN_SRC shell
+## 第一步：安装deepin-wine-for-ubuntu
+git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
+cd deepin-wine-for-ubuntu
+./install.sh
+## 下载企业微信、微信
+链接: https://pan.baidu.com/s/1r1UKMtImltNu6wEaqvSzdA 提取码: qgn4
+sudo dpkg -i deepin.com.***.deb安装
+## 企业微信乱码解决
+sudo gedit /opt/deepinwine/tools/run.sh
+## 修改WINE_CMD的值为：
+WINE_CMD="LC_ALL=zh_CN.UTF-8 deepin-wine"
+下载字体：
+链接: https://pan.baidu.com/s/1AG82SWt_TBDS1VdVYmp17A  密码: dv86
+unzip msyhttc.zip
+cp msyh.ttc ~/.deepinwine/Deepin-WXWork/drive_c/windows/Fonts/
+# 修改注册表
+sudo gedit ~/.deepinwine/Deepin-WXWork/system.reg
+## 修改下面两行的值
+"MS Shell Dlg"="msyh"
+"MS Shell Dlg 2"="msyh"
+# 修改注册表
+sudo gedit msyh_config.reg
+## 添加以下内容
+REGEDIT4
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]
+"Lucida Sans Unicode"="msyh.ttc"
+"Microsoft Sans Serif"="msyh.ttc"
+"MS Sans Serif"="msyh.ttc"
+"Tahoma"="msyh.ttc"
+"Tahoma Bold"="msyhbd.ttc"
+"msyh"="msyh.ttc"
+"Arial"="msyh.ttc"
+"Arial Black"="msyh.ttc"
+# 注册
+deepin-wine regedit msyh_config.reg
+## 安装图片库
+sudo apt-get install libjpeg62:i386
+#+END_SRC
+
+https://blog.csdn.net/qq_18649781/article/details/87476043
