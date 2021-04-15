@@ -4,7 +4,7 @@
 #+DATE:   2021 Apr 12
 #+OPTIONS: ^:nil
 
-* 问题 
+* 问题
   很多公司内部都会要求使用easyconnect来做代理，但是easyconnect只支持到ubuntu 18，
   现在的ubuntu 20.04 安装之后会出现各种问题。虽然后网上说替换了三个库就可以使用，
   或者在登录时进度条到70%的时候执行另外一个脚本。
@@ -13,8 +13,8 @@
   开发了 (https://github.com/Hagb/docker-easyconnect)。
 
 
-* 步骤 
-  
+* 步骤
+
 ** docker安装
    这个是基础的就不用说了，默认可以使用docker了。
 
@@ -38,24 +38,24 @@
      可以你自己选择。但是后续配置需要做相应改动。我们就叫10800端口是 *宿主机代理
      端口* ，该端口是SOCKS5协议的。
    - CLI_OPTS的值是一个字符串，"-t pwd"表示使用密码登录，"-d"表示vpn的地址，"-u"
-     表示登录的用户名，"-p"表示登录的密码。 
+     表示登录的用户名，"-p"表示登录的密码。
 
    执行该镜像日志会显示登录成功。这时候我们的浏览器或者终端就可以通过10800这个代
    理端口进行工作了。
 
-** 使用配置 
-   
+** 使用配置
+
 *** 浏览器使用配置
     浏览器要配置代理，我们使用的是Chrome的SwithyOmega来配置代理。我的电脑本来已
     经有一个shadowsocks的代理了，他使用的是1080端口，所以上面我们配置easyconnect
     的代理端口在宿主机上是10800.
 
-    #+CAPTION: shadowsocks代理配置 
+    #+CAPTION: shadowsocks代理配置
     #+LABEL: fig:SED-HR4049
     [[./images/代理配置-shadowsocks.png]]
 
     使用New Profile创建一个EasyConnect代理，右侧配置使用10800端口。
-    #+CAPTION: easyconnect代理配置 
+    #+CAPTION: easyconnect代理配置
     #+LABEL: fig:SED-HR4049
     [[./images/代理配置-easyconnect.png]]
 
@@ -65,14 +65,14 @@
     个网址进行配置。主要是google，github等可以配置走Shadowsocks代理，内网的服务
     比如gitlab地址等，可以走EasyConnect代理。
 
-    #+CAPTION: shell 
+    #+CAPTION: shell
     #+LABEL: fig:SED-HR4049
     [[./images/配置特别网址代理.png]]
 
     这样配置之后浏览器右上角选择SwitchyOmega自动切换。这时候登录内网的，或者
     google等就会各自使用各自的代理了愉快的上网了。
 
-*** 终端指令使用代理配置 
+*** 终端指令使用代理配置
     常见的我们要通过内网比如http://your-inner-net.com 的gitlab服务来下载代码。这
     时候需要git走10800端口的代理。主要包括两部分代理：http/https的代理，通过SSH
     的代理。
@@ -94,11 +94,10 @@
       首先保证~/.ssh/中已经产生了公钥和秘钥。然后在~/.ssh/config中配置你的gitlab
       服务器：
       #+BEGIN_SRC text
-        Host <内网ip> 
+        Host <内网ip>
              User git
              ProxyCommand nc -v -x 127.0.0.1:10800 %h %p
              ServerAliveInterval 30
              IdentityFile ~/.ssh/id_rsa
       #+END_SRC
       这样配置之后就可以通过终端进行git的操作了。
-      
