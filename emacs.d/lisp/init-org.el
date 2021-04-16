@@ -23,53 +23,37 @@
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (setq-default fill-column 80)
-;; (require 'ob)
-;; (require 'ob-plantuml)
-;; (org-babel-do-load-languages
-;;  'org-babel-load-languages
-;;  '(
-;;    (emacs-lisp . t)
-;;    (plantuml . t)
-;;    (org . t)
-;;    (sh . t)
-;;    (C . t)
-;;    (python . t)
-;;    (awk . t)
-;;    (ditaa . t)
-;;    (latex . t)
-;;    ))
+;; Highlight and indent source code blocks
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
 
-;; ;; Highlight and indent source code blocks
-;; (setq org-src-fontify-natively t)
-;; (setq org-src-tab-acts-natively t)
+;; Prevent confirmation
+(setq org-confirm-babel-evaluate nil)
 
-;; ;; Prevent confirmation
-;; (setq org-confirm-babel-evaluate nil)
+(use-package htmlize
+             :ensure t
+             :defer t
+             :commands (htmlize-buffer
+                        htmlize-file
+                        htmlize-many-files
+                        htmlize-many-files-dired
+                        htmlize-region))
 
-;; (use-package htmlize
-;;              :ensure t
-;;              :defer t
-;;              :commands (htmlize-buffer
-;;                         htmlize-file
-;;                         htmlize-many-files
-;;                         htmlize-many-files-dired
-;;                         htmlize-region))
-
-;; (use-package org-page
-;;   :ensure t
-;;   :config
-;;   (progn
-;;     (setq op/repository-directory "~/gitlab/congleetea.github.io")
-;;     (setq op/site-domain "https://congleetea.github.io")
-;;     (setq op/personal-github-link "https://github.com/congleetea")
-;;     (setq op/site-main-title "清园索道")
-;;     (setq op/site-sub-title "上下求索，识己识人识事")
-;;     (setq op/personal-disqus-shortname "congleetea")
-;;     (setq op/hashover-comments t)
-;;     (setq op/theme-root-directory "~/.emacs.d/themes")
-;;     (setq op/theme 'org-page-theme-suodao)
-;;     (setq op/highlight-render 'js)
-;;     )
-;;   )
+(use-package org-page
+  :ensure t
+  :config
+  (progn
+    (setq op/repository-directory "~/gitlab/congleetea.github.io")
+    (setq op/site-domain "https://congleetea.github.io")
+    (setq op/personal-github-link "https://github.com/congleetea")
+    (setq op/site-main-title "清园索道")
+    (setq op/site-sub-title "上下求索，识己识人识事")
+    (setq op/personal-disqus-shortname "congleetea")
+    (setq op/hashover-comments t)
+    (setq op/theme-root-directory "~/.emacs.d/themes")
+    (setq op/theme 'org-page-theme-suodao)
+    (setq op/highlight-render 'js)
+    )
+  )
 
 (provide 'init-org)

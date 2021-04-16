@@ -183,10 +183,14 @@ function noproxy() {
 	unset https_proxy
 }
 
+function runeasyconnect() {
+    /bin/bash ~/.shell/run-easyconnect.sh & 
+}
+
 alias aptversion="apt-cache madison "
 alias unzip="unzip -O CP936 "
 alias sshi="ssh-keygen -f $HOME/.ssh/known_hosts -R 192.168.1.2 && ssh "
-alias tow="cd /media/congleetea/OS/Users/congl/Documents"
+alias tow="cd ~/Windows10/Users/congl/Documents"
 
 if [ -f /usr/share/autojump/autojump.zsh ];then
 	source /usr/share/autojump/autojump.zsh
