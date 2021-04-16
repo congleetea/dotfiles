@@ -1,0 +1,39 @@
+#+TITLE:  Windows磁盘挂载
+#+AUTHOR: Clare Lee
+#+EMAIL:  congleetea@gmail.com
+#+DATE:   2021 Apr 16
+#+OPTIONS: ^:nil
+
+* 问题
+  - 在linux下面有时候要访问windows下面的东西，但是windows是很封闭的系统，访问不
+    是很方便，需要在文件系统里面去找。
+  - 如果window系统没有正常关机，那么就算在ubuntu下面找到这个磁盘，你也打不开，需
+    要重启进入window10系统下面正常关机才行。 
+  所以，这里进行windows磁盘自动挂载，磁盘的路径也可以我们自己选择，这样使用起来
+  就很方便。
+  
+* 操作
+  #+BEGIN_SRC shell
+    sudo fdisk -l
+  #+END_SRC
+  进行查看，但是这个可能不好猜哪一个是对应的哪一个盘。也可以直接在文件系统中看：
+  
+  #+CAPTION: Windows磁盘 
+  #+LABEL: fig:SED-HR4049
+  [[./images/windows磁盘.png]]
+
+  我们现在就把途中的/dev/sda3挂载到/home/xxx/Window10下面。
+
+  sudo gedit /etc/fstab 打开这个文件夹，在末尾加上：
+
+  #+BEGIN_SRC shell
+    /dev/sda3 /home/xxx/Windows10 ntfs-3g rw 0 0
+  #+END_SRC
+
+  保存，然后执行：
+
+  #+BEGIN_SRC shell
+    sudo mount -a
+  #+END_SRC
+
+  重启电脑就可以在/home/xxx/Windows10中看到这个磁盘了。
