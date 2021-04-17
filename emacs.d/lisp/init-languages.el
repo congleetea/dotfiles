@@ -292,28 +292,51 @@
    (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 ;;----------------------------------------------------------------------------
-;; YCM
+;; YCMD
 ;;----------------------------------------------------------------------------
 (use-package ycmd
   :ensure t
-  :init (add-hook 'c++-mode-hook #'ycmd-mode)
+  :init (add-hook 'after-init-hook #'global-ycmd-mode)
   :config
-  (set-variable 'ycmd-server-command '("/usr/bin/python" "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/ycmd"))
+  (set-variable 'ycmd-server-command '("/usr/bin/python3" "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/ycmd"))
   (set-variable 'ycmd-global-config "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/.ycm_extra_conf.py"))
 
 (use-package company-ycmd
   :ensure t
   :init (company-ycmd-setup)
   )
-
 ;; Show argument list in echo area
 (use-package eldoc
   :diminish eldoc-mode
   :init (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
-
 (use-package flycheck-ycmd
  :commands (flycheck-ycmd-setup)
  :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
+
+;;----------------------------------------------------------------------------
+;; irony for C/C++ 
+;;----------------------------------------------------------------------------
+;; (use-package irony
+;;   :ensure t
+;;   :defer t
+;;   :init 
+;;   (add-hook 'c++-mode-hook 'irony-mode)
+;;   (add-hook 'c-mode-hook 'irony-mode)
+;;   (add-hook 'objc-mode-hook 'irony-mode)
+;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;;   )
+
+;; ;; company mode
+;; (add-hook 'c++-mode-hook 'company-mode)
+;; (add-hook 'c-mode-hook 'company-mode)
+
+;; ;; flycheck-mode
+;; (add-hook 'c++-mode-hook 'flycheck-mode)
+;; (add-hook 'c-mode-hook 'flycheck-mode)
+;; (eval-after-load 'flycheck
+;; '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+;; ;; eldoc-mode
+;; (add-hook 'irony-mode-hook 'irony-eldoc)
 
 (provide 'init-languages)
 ;;; init-languages.el ends here

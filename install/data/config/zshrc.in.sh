@@ -126,7 +126,6 @@ alias ninstall="sudo npm install -g"
 alias pinstall="sudo pip install"
 alias ot="nautilus"
 alias ott="nautilus ."
-alias ycmd="${HOME}/gitlab/dotfiles/emacs.d/vendor/YCM-Generator/config_gen.py ./"
 alias szsh="source ~/.zshrc"
 alias dl="cd ~/Downloads"
 alias dc="cd ~/Documents"
@@ -151,6 +150,10 @@ function ginit() {
         echo "     email = $2" >> .git/config
         echo "GPATH\nGRTAGS\nGTAGS" >> .gitignore
     fi
+}
+
+function ycmd() {
+    cp ${HOME}/.emacs.d/vendor/ycm_extra_conf/ycm_extra_conf.py ./
 }
 
 alias cb="catkin build"
