@@ -2,45 +2,10 @@
 
 This is an awesome config files.
 
-include:
-
-#+BEGIN_SRC text
-  .zshrc
-  terminator
-  gitconfig
-  Vagrantfile
-  polipo
-#+END_SRC
-
-** install ubuntu
-
-   #+BEGIN_SRC text
-    usage:
-         install-ubuntu.sh init                 : install initial software in init_sws.
-         install-ubuntu.sh base                 : install basic software in base_sws.
-         install-ubuntu.sh option               : install optional software in option_sws.
-         install-ubuntu.sh single SOFTWARE_NAME : install single software.
-   #+END_SRC
-
-
-** link config files
-
-link terminator config, .emacs.d, .zshrc, gitconfig, vimrc(TODO).
-
-- ./configs/terminator.conf ${HOME}/.config/terminator/config
-- ./configs/gitconfig ${HOME}/.gitconfig
-- ./configs/zshrc.sh ${HOME}/.zshrc
-- ./emacs.d  ${HOME}/.emacs.d
-- ./configs/vimrc ${HOME}/.vimrc
-
-#+BEGIN_SRC shell
-./link_configs.sh
-#+END_SRC
-
 
 ** emacs
 
-Here emacs need version 25.+.
+Here emacs need version 27.+.
 
 *** 编写emacs相关内容的时候，常用的快捷键：
 
@@ -78,19 +43,6 @@ Here emacs need version 25.+.
 
 
 *** ycmd 自动补全
-
-    安装方法参考install-ubuntu.sh ycmd。
-
-    要补全你的c++项目，可以通过YCM-Generator生成.ycm_extra_conf.py 文件。这样emacs打开项目的时后会加载这个文件，通过该文件找到
-    补全。
-
-    生成的方法是:
-
-    #+BEGIN_SRC shell
-    cd YCM-Generator && ./config_gen.py -x c++ ~/YOUR_PROJECT_PATH
-    #+END_SRC
-
-    目前生成的文件找不到系统的c++函数，因此可以在.ycm_extra_conf.py的flags中添加'-I/usr/include/c++/7' (根据你使用的c++版本确定,其他没有包含的路径也可以通过同样的方法加入).
 
 
 *** GUI不能输入中文
