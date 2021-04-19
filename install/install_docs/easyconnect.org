@@ -80,10 +80,10 @@
     - http/https代理配置
       在~/.gitconfig中配置:
       #+BEGIN_SRC shell
-        [http]
+        [http "http://your-git-server.com"]
         proxy = socks5://127.0.0.1:10800
 
-        [https]
+        [https "https://your-git-server.com"]
         proxy = socks5://127.0.0.1:10800
 
       #+END_SRC
