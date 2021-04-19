@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Install typora 
+function install_typora {
+	# check exit status
+	if [ $? = 0 ]; then
+		# Install package
+        superuser_do "sudo apt install snapd && sudo snap install typora"
+        echo_message info "Typora was installed."
+	else
+		# Cancelled
+		echo_message info "Installation of $NAME cancelled."
+		# return
+		install_custom_app
+	fi
+}

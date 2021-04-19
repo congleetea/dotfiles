@@ -41,7 +41,7 @@ function install_custom_app {
         'install_emacs'             'emacs' \
         'install_wallpaper-variety' 'wallpaper-variety' \
         'install_shadowsocks'       'shadowsocks' \
-        'install_go_for_it'         'go_for_it' \
+        'install_typora'            'typora' \
         'install_qiyeweixin'        'qiyeweixin' \
 		3>&1 1>&2 2>&3)
 
