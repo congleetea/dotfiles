@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: org worknote
+# key: myorgworknote
+# --
+
+#+TITLE:  ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR: `(user-full-name)`
+#+EMAIL:  `user-mail-address`
+#+DATE:   `(format-time-string "%Y %b %d")`
+#+OPTIONS: ^:nil
+
+* 每日工作
+** `(format-time-string "%Y/%m/%d")`
+
+
+* 工作计划项
+
+| 时间 | 星期 | 工作项 |
+|--     

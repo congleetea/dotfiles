@@ -9,6 +9,7 @@
   :config (global-pangu-spacing-mode t)
   (setq pangu-spacing-real-insert-separtor t))
 
+(use-package use-package-ensure-system-package :ensure t)
 ;; --------------------------------------------------------------------
 ;; ros-relative mode
 (setq auto-mode-alist (cons '("\\.launch$" . xml-mode) auto-mode-alist))
@@ -190,6 +191,26 @@
                          )
                        )
              )
+;;----------------------------------------------------------------------------
+;; Golang  
+;;----------------------------------------------------------------------------
+(use-package go-mode
+  :commands go-mode
+  ;; :ensure-system-package
+  ;; ((goimports . "go get -u golang.org/x/tools/cmd/goimports")
+  ;;  (godef . "go get -u github.com/rogpeppe/godef")
+  ;;  (gopls . "go get -u golang.org/x/tools/gopls@latest")
+  ;;  (gocode . "go get -u github.com/nsf/gocode"))
+  :config
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+(use-package go-autocomplete
+  :hook go-mode
+  :requires go-mode
+  :init
+  ;; setting up autocomplete should happen after yasnippet so we don't duplciate tab bindings.
+  (require 'auto-complete-config))
 
 ;;----------------------------------------------------------------------------
 ;; lisp: C-x C-e 执行光标下lisp

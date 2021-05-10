@@ -27,7 +27,8 @@
     "aS"  'hs-show-all
     "ah"  'hs-hide-block
     "as"  'hs-show-block
-    "b"   'projectile-switch-to-buffer
+    "b"   'ivy-switch-buffer
+;;    "b"   'projectile-switch-to-buffer
     "B"  'magit-blame-toggle
     "c"  'comment-dwim
     "d"  'kill-this-buffer

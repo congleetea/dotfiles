@@ -11,7 +11,7 @@ function install_emacs {
     link $Src $Dest
     echo_message info "Install dependencies of emacs."
     # superuser_do "sudo apt-get install -y exuberant-ctags build-essential texinfo libx11-dev libxpm-dev libgif-dev openjdk-8-jdk libxaw7-dev libjpeg-dev libpng12-dev libtiff5-dev libncurses5-dev xsel libclang-3.8-dev texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-xetex libgnutls-dev"
-    superuser_do "sudo apt-get install -y libxpm-dev libgnutls28-dev libncurses-dev libxaw7-dev xsel"
+    superuser_do "sudo apt-get install -y libxpm-dev libgnutls28-dev libncurses-dev libxaw7-dev xsel exuberant-ctags"
     installed_emacs=$(emacs --version | grep $EMACS_VER)
     if [[ -n $installed_emacs ]] ;then
         echo_message info "Emacs $EMACS_VER was installed."
