@@ -37,7 +37,7 @@ function install_emacs {
         if [ -d $PKGS_DIR/global-${GLOBAL_VER} ];then
             rm -rf $PKGS_DIR/global-${GLOBAL_VER}
         fi
-        cd $PKGS_DIR && tar xvf global-${GLOBAL_VER}.tar.gz && cd global-${GLOBAL_VER} && ./configure && make && cd $PKGS_DIR/global-${GLOBAL_VER}
+        cd $PKGS_DIR && tar xvf global-${GLOBAL_VER}.tar.gz && cd global-${GLOBAL_VER} && ./configure --with-exuberant-ctags=/usr/bin/ctags && make && cd $PKGS_DIR/global-${GLOBAL_VER}
         superuser_do "sudo make install"
         rm -rf $PKGS_DIR/global-${GLOBAL_VER}
     fi
