@@ -1,0 +1,156 @@
+" =============== MAIN CONFIGURATION ======================
+set nocompatible                     "Don't keep compatibility with VI
+set modifiable
+set fileformat=unix
+set number                           "Show line number
+set showcmd                          "Show incomplete cmds down the bottom
+set showmode                         "Show current mode down the bottom
+set encoding=utf-8                   "Force UTF-8 encoding for special characters
+set ruler
+set autoindent
+set foldenable
+set showmatch
+set hlsearch
+set incsearch                        "搜索时高亮显示搜索结果
+set ignorecase                       "搜索时忽略大小写
+set smartcase                        "如果同时打开了ignorecase，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。
+set noswapfile                       "打开文件时不额外创建备份文件.x.swp。
+set undofile                         "保留撤销历史,文件关闭后还可以使用历史操作.
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
+set undodir=~/.vim/.undo//
+set history=1000
+set wildmenu
+set wildmode=longest:list,full
+set laststatus=2
+syntax on
+let mapleader=","
+
+" ===================== Plugins=============================
+call plug#begin()
+Plug 'preservim/NERDTree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'congleetea/vim-ros-ycm'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'preservim/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+call plug#end()
+
+" ===================== Theme ==============================
+set t_Co=256
+let g:airline#extensions#tabline#enabled=1    "开启 tab 栏
+let g:airline_theme='molokai'
+
+
+" ===================== Shortcut ==========================
+" <C+w>h/l/j/k 表示多窗口左右上下切换. 
+" sp,vs 表示水平分割窗口和垂直分割窗口。 
+nmap <leader>o <C-w>o   "关闭其他窗口,只保留鼠标所在的窗口
+nmap <leader>d <C-w>c   "关闭当前窗口
+nmap <C-w-=> <C-w-+>
+map <C-b> <Left>
+map <C-f> <Right>
+
+" ===================== NERDTree ===========================
+" 在tree界面按m可以出现新建、删除、修改文件等操作.
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>             "查看当前目录所在位置，或者显示上一层目录.
+
+" ===================== fzf ================================
+nnoremap <leader>hp :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+
+
+
+" ===================== Comment/Uncomment ==================
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+
+" ===================== C++ ================================
+let g:ycm_server_python_interpreter='/usr/bin/python3'
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
+
+" ===================== Snippets ===========================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets"]
+function! g:UltiSnips_Complete()
+   call UltiSnips#ExpandSnippet()
+   if g:ulti_expand_res ==
+     if pumvisible()
+       return "\<C-n>"
+     else
+       call UltiSnips#JumpForwards()
+       if g:ulti_jump_forwards_res ==
+         return "\<TAB>"
+       endif
+     endif
+   endif
+   return ""
+ endfunction
+
+ function! g:UltiSnips_Reverse()
+   call UltiSnips#JumpBackwards()
+   if g:ulti_jump_backwards_res ==
+     return "\<C-P>"
+   endif
+
+   return ""
+ endfunction
+
+ if !exists("g:UltiSnipsJumpForwardTrigger")
+   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+ endif
+ if !exists("g:UltiSnipsJumpBackwardTrigger")
+   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+ endif
+ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+ au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"

@@ -1,4 +1,4 @@
-#+TITLE:  安装企业微信 
+#+TITLE:  deepinwine 下安装Windows运用 
 #+AUTHOR: Clare Lee
 #+EMAIL:  congleetea@gmail.com
 #+DATE:   2021 Apr 13
@@ -26,6 +26,10 @@
    #+END_SRC
    现在就可以启动企业微信了。
 
+
+** 安装钉钉
+   
+   
 ** 一些可能的问题解决
 *** 汉字输入问题
     sudo打开/opt/deepinwine/tools/run_v2.sh找到WINE_CMD处，改成：
@@ -70,3 +74,6 @@
     #+END_SRC
     
     引用： https://blog.csdn.net/qq_18649781/article/details/87476043
+
+** 升级版本
+   

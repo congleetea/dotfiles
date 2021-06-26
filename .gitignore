@@ -12,7 +12,8 @@ recentf
 emacs.d/eshell
 emacs.d/vendor/ycmd
 emacs.d/vendor/YCM-Generator
-
+emacs.d/transient/
 GPATH
 GRTAGS
 GTAGS
+

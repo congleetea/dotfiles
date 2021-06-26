@@ -319,8 +319,8 @@
   :ensure t
   :init (add-hook 'after-init-hook #'global-ycmd-mode)
   :config
-  (set-variable 'ycmd-server-command '("/usr/bin/python3" "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "/home/congleetea/gitlab/dotfiles/emacs.d/vendor/ycmd/.ycm_extra_conf.py"))
+  (set-variable 'ycmd-server-command '("/usr/bin/python3" "/home/congleetea/.emacs.d/vendor/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/home/congleetea/.emacs.d/vendor/ycmd/.ycm_extra_conf.py"))
 
 (use-package company-ycmd
   :ensure t
@@ -330,9 +330,9 @@
 (use-package eldoc
   :diminish eldoc-mode
   :init (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
-(use-package flycheck-ycmd
- :commands (flycheck-ycmd-setup)
- :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
+;; (use-package flycheck-ycmd
+;;  :commands (flycheck-ycmd-setup)
+;;  :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
 
 ;;----------------------------------------------------------------------------
 ;; irony for C/C++ 

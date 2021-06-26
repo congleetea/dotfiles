@@ -156,7 +156,8 @@ function ycmd() {
     cp ${HOME}/.emacs.d/vendor/ycm_extra_conf/ycm_extra_conf.py ./
 }
 
-alias cb="catkin build"
+alias rcb="catkin build"
+alias rcc="catkin config -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "
 alias catkin_changelog="catkin_generate_changelog --skip-merges"
 function cm() {
   nowdir=$PWD
@@ -200,7 +201,7 @@ if [ -f /usr/share/autojump/autojump.zsh ];then
 fi
 
 ##　For ROS
-export ROS_WORKSPACE=~/gitlab/catkin_ws/src
+export ROS_WORKSPACE=~/gitlab/catkin_ws
 if [ -f /opt/ros/noetic/setup.zsh ];then
 	source /opt/ros/noetic/setup.zsh
 fi
@@ -209,8 +210,8 @@ if [ -f ~/gitlab/catkin_ws/devel/setup.zsh ];then
 	source ~/gitlab/catkin_ws/devel/setup.zsh
 fi
 # source /home/muyuan/muyuanros/ros_app/setup.zsh
-# export ROS_IP=192.168.1.159
-# export ROS_MASTER_URI=http://192.168.1.2:11311
+export ROS_IP=192.168.1.101
+export ROS_MASTER_URI=http://192.168.1.2:11311
 
 ## For Golang
 export GOROOT=/usr/local/go
