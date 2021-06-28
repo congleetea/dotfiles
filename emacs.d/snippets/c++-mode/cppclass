@@ -1,0 +1,11 @@
+# name: cpp class 
+# key: mycppclass
+# --
+
+namespace $1 {
+class $2 {
+ public:
+  $2();  
+  ~$2();  
+};
+} // namespace $1

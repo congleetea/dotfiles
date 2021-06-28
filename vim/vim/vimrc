@@ -6,8 +6,6 @@ set number                           "Show line number
 set showcmd                          "Show incomplete cmds down the bottom
 set showmode                         "Show current mode down the bottom
 set encoding=utf-8                   "Force UTF-8 encoding for special characters
-set hidden
-set autoread
 set ruler
 set autoindent
 set foldenable
@@ -42,15 +40,13 @@ Plug 'congleetea/vim-ros-ycm'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rhysd/vim-clang-format'
 Plug 'preservim/nerdcommenter'
-Plug 'congleetea/gtags-vim'
-Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,svn等修改信息) 
 call plug#end()
 
 " ===================== Theme ==============================
 set t_Co=256
 let g:airline#extensions#tabline#enabled=1    "开启 tab 栏
 let g:airline_theme='molokai'
-let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '<':'>'} 
+
 
 " ===================== Shortcut ==========================
 " <C+w>h/l/j/k 表示多窗口左右上下切换. 
@@ -75,8 +71,6 @@ nnoremap <leader>hp :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 
 
-
-" ===================== GIT ===============================
 
 " ===================== Comment/Uncomment ==================
 " Create default mappings
@@ -112,48 +106,28 @@ let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " ===================== C++ astyle ==============================
-map <leader>ai :%!astyle --options=/home/congleetea/gitlab/dotfiles/configs/astylerc <CR>
-
-
-" =================Auto generate file header comment ======
-autocmd BufNewFile *.cpp exec ":call SetTitle()"
-    func SetTitle()
-        call setline(1,"/**") 
-        call append(line("."), " *   Copyright (C) ".strftime("%Y")." All rights reserved.")
-        call append(line(".")+1, " *") 
-        call append(line(".")+2, " *   FileName      ：".expand("%:t")) 
-        call append(line(".")+3, " *   Author        ：vimjc.com")
-        call append(line(".")+4, " *   Email         ：admin@vimjc.com")
-        call append(line(".")+5, " *   Date          ：".strftime("%Y年%m月%d日")) 
-        call append(line(".")+6, " *   Description   ：") 
-        call append(line(".")+7, " */") 
-    endfunc
-"自动将光标定位到末尾"
-autocmd BufNewFile * normal G
+map <leader>ai :call FormatCode()<CR>
+func! FormatCode()
+    exec "w"
+    if &filetype == 'C' || &filetype == 'h'
+    exec "!astyle --options=~/gitlab/dotfiles/configs/astylerc %"
+    elseif &filetype == 'cpp'
+           exec "!astyle --options=~/gitlab/dotfiles/configs/astylerc %"        
+    return
+    endif
+endfunc
 
 " ===================== Tags ==============================
-set cscopetag                             " 使用 cscope 作为 tags 命令
-set cscopeprg='gtags-cscope'              " 使用 gtags-cscope 代替 cscope
-let GtagsCscope_Auto_Load = 1
-let CtagsCscope_Auto_Map = 1
-let GtagsCscope_Quiet = 1
-let gtags_file=findfile("GTAGS", ";")     " 查找 gtags 文件
-if !empty(gtags_file)
-    exe "cs add" gtags_file
-endif
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
-function! UpdateGtags()
-    let curdir=getcwd()
-    while !filereadable("./GTAGS")
-	cd ..
-	let cdx=!pwd
-	if getcwd() == "/"
-	     break
-	endif
-    endwhile
-    if filewritable("GTAGS")
-	!gtags
-    endif
-    execute ":cd " . curdir
-endfunction
-map <leader>t :call UpdateGtags()<CR>
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1

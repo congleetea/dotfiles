@@ -21,7 +21,8 @@
 ;; --------------------------------------------------------------------
 (require 'gtags)
 (use-package bpr :ensure t)
-
+(defun vc-proj-root (file)
+  (vc-find-root file ".root"))
 ;; Bind some useful keys in the gtags select buffer that evil overrides.
 (add-hook 'gtags-select-mode-hook
           (lambda ()
@@ -31,7 +32,7 @@
 (defun gtags-reindex ()
   "Kick off gtags reindexing."
   (interactive)
-  (let* ((root-path (expand-file-name (vc-git-root (buffer-file-name))))
+  (let* ((root-path (expand-file-name (vc-proj-root (buffer-file-name))))
          (gtags-filename (expand-file-name "GTAGS" root-path)))
     (if (file-exists-p gtags-filename)
       (gtags-index-update root-path)
@@ -320,7 +321,10 @@
   :init (add-hook 'after-init-hook #'global-ycmd-mode)
   :config
   (set-variable 'ycmd-server-command '("/usr/bin/python3" "/home/congleetea/.emacs.d/vendor/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "/home/congleetea/.emacs.d/vendor/ycmd/.ycm_extra_conf.py"))
+  (set-variable 'ycmd-global-config "/home/congleetea/.emacs.d/vendor/ycmd/.ycm_extra_conf.py")
+  ;(set-variable 'ycmd-server-command '("/usr/bin/python3" "/usr/lib/ycmd/ycmd"))
+  ;(set-variable 'ycmd-global-config "/usr/lib/ycmd/ycm_extra_conf.py")
+  )
 
 (use-package company-ycmd
   :ensure t
@@ -333,31 +337,6 @@
 ;; (use-package flycheck-ycmd
 ;;  :commands (flycheck-ycmd-setup)
 ;;  :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup))
-
-;;----------------------------------------------------------------------------
-;; irony for C/C++ 
-;;----------------------------------------------------------------------------
-;; (use-package irony
-;;   :ensure t
-;;   :defer t
-;;   :init 
-;;   (add-hook 'c++-mode-hook 'irony-mode)
-;;   (add-hook 'c-mode-hook 'irony-mode)
-;;   (add-hook 'objc-mode-hook 'irony-mode)
-;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;;   )
-
-;; ;; company mode
-;; (add-hook 'c++-mode-hook 'company-mode)
-;; (add-hook 'c-mode-hook 'company-mode)
-
-;; ;; flycheck-mode
-;; (add-hook 'c++-mode-hook 'flycheck-mode)
-;; (add-hook 'c-mode-hook 'flycheck-mode)
-;; (eval-after-load 'flycheck
-;; '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-;; ;; eldoc-mode
-;; (add-hook 'irony-mode-hook 'irony-eldoc)
 
 (provide 'init-languages)
 ;;; init-languages.el ends here

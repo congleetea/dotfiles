@@ -13,6 +13,8 @@ emacs.d/eshell
 emacs.d/vendor/ycmd
 emacs.d/vendor/YCM-Generator
 emacs.d/transient/
+vim/vim/autoload
+vim/vim/plugged
 GPATH
 GRTAGS
 GTAGS
