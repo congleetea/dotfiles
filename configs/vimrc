@@ -6,6 +6,8 @@ set number                           "Show line number
 set showcmd                          "Show incomplete cmds down the bottom
 set showmode                         "Show current mode down the bottom
 set encoding=utf-8                   "Force UTF-8 encoding for special characters
+set hidden
+set autoread
 set ruler
 set autoindent
 set foldenable
@@ -40,6 +42,7 @@ Plug 'congleetea/vim-ros-ycm'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rhysd/vim-clang-format'
 Plug 'preservim/nerdcommenter'
+Plug 'congleetea/gtags-vim'
 call plug#end()
 
 " ===================== Theme ==============================
@@ -106,28 +109,31 @@ let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " ===================== C++ astyle ==============================
-map <leader>ai :call FormatCode()<CR>
-func! FormatCode()
-    exec "w"
-    if &filetype == 'C' || &filetype == 'h'
-    exec "!astyle --options=~/gitlab/dotfiles/configs/astylerc %"
-    elseif &filetype == 'cpp'
-           exec "!astyle --options=~/gitlab/dotfiles/configs/astylerc %"        
-    return
-    endif
-endfunc
+map <leader>ai :%!astyle --options=/home/congleetea/gitlab/dotfiles/configs/astylerc <CR>
 
 " ===================== Tags ==============================
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-" enable gtags module
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
+set cscopetag                             " 使用 cscope 作为 tags 命令
+set cscopeprg='gtags-cscope'              " 使用 gtags-cscope 代替 cscope
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+let gtags_file=findfile("GTAGS", ";")     " 查找 gtags 文件
+if !empty(gtags_file)
+    exe "cs add" gtags_file
+endif
 
-" config project root markers.
-let g:gutentags_project_root = ['.root']
-
-" generate datebases in my cache directory, prevent gtags files polluting my project
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-" change focus to quickfix window after search (optional).
-let g:gutentags_plus_switch = 1
+function! UpdateGtags()
+    let curdir=getcwd()
+    while !filereadable("./GTAGS")
+	cd ..
+	let cdx=!pwd
+	if getcwd() == "/"
+	     break
+	endif
+    endwhile
+    if filewritable("GTAGS")
+	!gtags
+    endif
+    execute ":cd " . curdir
+endfunction
+map <leader>t :call UpdateGtags()<CR>
