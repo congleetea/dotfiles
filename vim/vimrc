@@ -25,6 +25,8 @@ set history=1000
 set wildmenu
 set wildmode=longest:list,full
 set laststatus=2
+set iskeyword=a-z,A-Z                "修改单词的定义方式，默认字母，数字和下划线组合都是单词
+set clipboard=unnamedplus            "剪切板
 syntax on
 let mapleader=","
 
@@ -43,18 +45,19 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rhysd/vim-clang-format'
 Plug 'preservim/nerdcommenter'
 Plug 'congleetea/gtags-vim'
-Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,svn等修改信息) 
+Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,svn等修改信息)
+Plug 'jesseleite/vim-agriculture'
 call plug#end()
 
 " ===================== Theme ==============================
 set t_Co=256
 let g:airline#extensions#tabline#enabled=1    "开启 tab 栏
 let g:airline_theme='molokai'
-let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '<':'>'} 
+let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '<':'>'}
 
 " ===================== Shortcut ==========================
-" <C+w>h/l/j/k 表示多窗口左右上下切换. 
-" sp,vs 表示水平分割窗口和垂直分割窗口。 
+" <C+w>h/l/j/k 表示多窗口左右上下切换.
+" sp,vs 表示水平分割窗口和垂直分割窗口。
 nmap <leader>o <C-w>o   "关闭其他窗口,只保留鼠标所在的窗口
 nmap <leader>d <C-w>c   "关闭当前窗口
 nmap <C-w-=> <C-w-+>
@@ -64,8 +67,10 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+autocmd BufWritePre * :%s/\s\+$//e             "保存的时候删除尾部空格.
+nnoremap <leader>S :%s/\s\+$//e<CR>            "<leader>S删除尾部空格
 
-" ===================== NERDTree ===========================
+"===================== NERDTree ===========================
 " 在tree界面按m可以出现新建、删除、修改文件等操作.
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>             "查看当前目录所在位置，或者显示上一层目录.
@@ -75,7 +80,10 @@ nnoremap <leader>hp :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 
 
-
+" ===================== GIT ===============================
+nmap <Leader>s <Plug>AgRawSearch
+" vmap <Leader>/ <Plug>AgRawVisualSelection
+" nmap <Leader>* <Plug>AgRawWordUnderCursor
 " ===================== GIT ===============================
 
 " ===================== Comment/Uncomment ==================
@@ -103,7 +111,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 
@@ -118,15 +126,15 @@ map <leader>ai :%!astyle --options=/home/congleetea/gitlab/dotfiles/configs/asty
 " =================Auto generate file header comment ======
 autocmd BufNewFile *.cpp exec ":call SetTitle()"
     func SetTitle()
-        call setline(1,"/**") 
+        call setline(1,"/**")
         call append(line("."), " *   Copyright (C) ".strftime("%Y")." All rights reserved.")
-        call append(line(".")+1, " *") 
-        call append(line(".")+2, " *   FileName      ：".expand("%:t")) 
+        call append(line(".")+1, " *")
+        call append(line(".")+2, " *   FileName      ：".expand("%:t"))
         call append(line(".")+3, " *   Author        ：vimjc.com")
         call append(line(".")+4, " *   Email         ：admin@vimjc.com")
-        call append(line(".")+5, " *   Date          ：".strftime("%Y年%m月%d日")) 
-        call append(line(".")+6, " *   Description   ：") 
-        call append(line(".")+7, " */") 
+        call append(line(".")+5, " *   Date          ：".strftime("%Y年%m月%d日"))
+        call append(line(".")+6, " *   Description   ：")
+        call append(line(".")+7, " */")
     endfunc
 "自动将光标定位到末尾"
 autocmd BufNewFile * normal G

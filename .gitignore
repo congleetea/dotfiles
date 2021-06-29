@@ -15,6 +15,9 @@ emacs.d/vendor/YCM-Generator
 emacs.d/transient/
 vim/vim/autoload
 vim/vim/plugged
+vim/vim/.undo
+vim/vim/.backup
+vim/vim/.swp
 GPATH
 GRTAGS
 GTAGS
