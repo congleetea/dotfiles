@@ -72,8 +72,8 @@ nnoremap <leader>d :bd<CR>  "关闭当前缓冲buffer
 nmap <C-x>3 <C-w>v           "打开一个垂直窗口
 nmap <C-x>4 <C-w>s           "打开一个水平窗口
 nmap <C-w-=> <C-w-+>
-map <C-b> <Left>
-map <C-f> <Right>
+imap <C-b> <Left>
+imap <C-f> <Right>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
