@@ -28,6 +28,10 @@ set laststatus=2
 set iskeyword=a-z,A-Z                "修改单词的定义方式，默认字母，数字和下划线组合都是单词
 set clipboard=unnamedplus            "剪切板
 syntax on
+syntax on                    " 开启文件类型侦测
+filetype indent on           " 针对不同的文件类型采用不同的缩进格式
+filetype plugin on           " 针对不同的文件类型加载对应的插件
+filetype plugin indent on    " 启用自动补全
 let mapleader=","
 
 " ===================== Plugins=============================
@@ -47,6 +51,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'congleetea/gtags-vim'
 Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,svn等修改信息)
 Plug 'jesseleite/vim-agriculture'
+Plug 'tpope/vim-projectionist'                   "project config
+Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
 call plug#end()
 
 " ===================== Theme ==============================
@@ -165,3 +172,10 @@ function! UpdateGtags()
     execute ":cd " . curdir
 endfunction
 map <leader>t :call UpdateGtags()<CR>
+
+
+" ===================== Snippets ==============================
+let g:UltiSnipsExpandTrigger = "<leader>k"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+

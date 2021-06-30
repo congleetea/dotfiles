@@ -1,0 +1,45 @@
+snippet mycppclass "C++ class"
+namespace $1 {
+class $2 {
+ public:
+  $2();
+  ~$2();
+};
+} // namespace $1
+endsnippet
+snippet mycppconstructor "C++ Constructor"
+$1();
+$1(const $1&);
+$1& operator=(const $1&)
+$1($1&& param);
+$1& operator=($1&& param);
+endsnippet
+
+snippet mycppdef "C/C++ file define"
+#ifndef $1
+#define $1
+
+
+#endif // $1
+endsnippet
+
+snippet mycppheader "C/C++ file header"
+/****************************************************************************
+ *
+ *   Copyright (c) 2021 $1 Development Team. All rights reserved.
+ *   @author $2
+ *   @created `date`
+ *
+ ****************************************************************************/
+endsnippet
+
+endsnippet myrosmain "ROS main function."
+#include "$1/$1.h"
+
+int main(int argc, char** argv) {
+  ros::init(argc, argv, "$1_node");
+  $1::$2 $1;
+  ros::spin();
+  return 0;
+}
+endsnippet
