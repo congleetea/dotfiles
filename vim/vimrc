@@ -6,6 +6,8 @@ set number                           "Show line number
 set showcmd                          "Show incomplete cmds down the bottom
 set showmode                         "Show current mode down the bottom
 set encoding=utf-8                   "Force UTF-8 encoding for special characters
+set tabstop=4
+set shiftwidth=4
 set hidden
 set autoread
 set ruler
@@ -178,4 +180,3 @@ map <leader>t :call UpdateGtags()<CR>
 let g:UltiSnipsExpandTrigger = "<leader>k"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-
