@@ -55,7 +55,6 @@ Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,
 Plug 'jesseleite/vim-agriculture'
 Plug 'tpope/vim-projectionist'                   "project config
 Plug 'SirVer/ultisnips'
-Plug 'ervandew/supertab'
 call plug#end()
 
 " ===================== Theme ==============================
@@ -67,8 +66,9 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '<':'>'}
 " ===================== Shortcut ==========================
 " <C+w>h/l/j/k 表示多窗口左右上下切换.
 " sp,vs 表示水平分割窗口和垂直分割窗口。
-nmap <leader>o <C-w>o   "关闭其他窗口,只保留鼠标所在的窗口
-nmap <leader>d <C-w>c   "关闭当前窗口
+nmap <leader>o <C-w>o       "关闭其他窗口,只保留鼠标所在的窗口
+nmap <leader>q <C-w>c       "关闭当前窗口
+nnoremap <leader>d :bd<CR>  "关闭当前缓冲buffer
 nmap <C-w-=> <C-w-+>
 map <C-b> <Left>
 map <C-f> <Right>
