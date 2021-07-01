@@ -162,21 +162,21 @@ if !empty(gtags_file)
 endif
 
 function! UpdateGtags()
-    let curdir=getcwd()
-    while !filereadable("./GTAGS")
+	let curdir=getcwd()
+	while !filereadable("./GTAGS")
 	cd ..
-	let cdx=!pwd
 	if getcwd() == "/"
-	     break
+		 break
 	endif
-    endwhile
-    if filewritable("GTAGS")
-	!gtags
-    endif
-    execute ":cd " . curdir
+	endwhile
+	if filewritable("GTAGS")
+		let cmd = 'gtags'
+		let resp = system(cmd)
+	endif
+	execute ":cd " . curdir
 endfunction
 map <leader>t :call UpdateGtags()<CR>
-
+" autocmd BufWritePost *.cpp,*.h,*.c,*.cc call UpdateGtags()
 
 " ===================== Snippets ==============================
 let g:UltiSnipsExpandTrigger = "<leader>k"
