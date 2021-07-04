@@ -6,8 +6,8 @@ set number                           "Show line number
 set showcmd                          "Show incomplete cmds down the bottom
 set showmode                         "Show current mode down the bottom
 set encoding=utf-8                   "Force UTF-8 encoding for special characters
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set hidden
 set autoread
 set ruler
@@ -55,13 +55,16 @@ Plug 'airblade/vim-gitgutter'                    " 版本控制插件(显示git,
 Plug 'jesseleite/vim-agriculture'
 Plug 'tpope/vim-projectionist'                   "project config
 Plug 'SirVer/ultisnips'
+Plug 'taketwo/vim-ros'
+Plug 'tpope/vim-surround'
+Plug 'Chiel92/vim-autoformat'                    "代码格式化
 call plug#end()
 
 " ===================== Theme ==============================
 set t_Co=256
 let g:airline#extensions#tabline#enabled=1    "开启 tab 栏
 let g:airline_theme='molokai'
-let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '<':'>'}
+let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '#include <':'>'}
 
 " ===================== Shortcut ==========================
 " <C+w>h/l/j/k 表示多窗口左右上下切换.
@@ -91,10 +94,6 @@ nnoremap <leader>hp :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 
 
-" ===================== GIT ===============================
-nmap <Leader>s <Plug>AgRawSearch
-" vmap <Leader>/ <Plug>AgRawVisualSelection
-" nmap <Leader>* <Plug>AgRawWordUnderCursor
 " ===================== GIT ===============================
 
 " ===================== Comment/Uncomment ==================
@@ -131,22 +130,24 @@ let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " ===================== C++ astyle ==============================
-map <leader>ai :%!astyle --options=/home/congleetea/gitlab/dotfiles/configs/astylerc <CR>
+let g:formatdef_my_cpp = '"astyle --options=/home/congleetea/gitlab/dotfiles/configs/astylerc"'
+let g:formatters_cpp = ['astyle_cpp']
+au BufWrite * :Autoformat
 
 
 " =================Auto generate file header comment ======
 autocmd BufNewFile *.cpp exec ":call SetTitle()"
-    func SetTitle()
-        call setline(1,"/**")
-        call append(line("."), " *   Copyright (C) ".strftime("%Y")." All rights reserved.")
-        call append(line(".")+1, " *")
-        call append(line(".")+2, " *   FileName      ：".expand("%:t"))
-        call append(line(".")+3, " *   Author        ：vimjc.com")
-        call append(line(".")+4, " *   Email         ：admin@vimjc.com")
-        call append(line(".")+5, " *   Date          ：".strftime("%Y年%m月%d日"))
-        call append(line(".")+6, " *   Description   ：")
-        call append(line(".")+7, " */")
-    endfunc
+func SetTitle()
+	call setline(1,"/**")
+	call append(line("."), " *   Copyright (C) ".strftime("%Y")." All rights reserved.")
+	call append(line(".")+1, " *")
+	call append(line(".")+2, " *   FileName      ：".expand("%:t"))
+	call append(line(".")+3, " *   Author        ：vimjc.com")
+	call append(line(".")+4, " *   Email         ：admin@vimjc.com")
+	call append(line(".")+5, " *   Date          ：".strftime("%Y年%m月%d日"))
+	call append(line(".")+6, " *   Description   ：")
+	call append(line(".")+7, " */")
+endfunc
 "自动将光标定位到末尾"
 autocmd BufNewFile * normal G
 
@@ -158,16 +159,16 @@ let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 let gtags_file=findfile("GTAGS", ";")     " 查找 gtags 文件
 if !empty(gtags_file)
-    exe "cs add" gtags_file
+	exe "cs add" gtags_file
 endif
 
 function! UpdateGtags()
 	let curdir=getcwd()
 	while !filereadable("./GTAGS")
-	cd ..
-	if getcwd() == "/"
-		 break
-	endif
+		cd ..
+		if getcwd() == "/"
+			break
+		endif
 	endwhile
 	if filewritable("GTAGS")
 		let cmd = 'gtags'
@@ -182,3 +183,9 @@ map <leader>t :call UpdateGtags()<CR>
 let g:UltiSnipsExpandTrigger = "<leader>k"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+
+" ===================== Snippets ==============================
+let g:ycm_semantic_triggers = {
+			\   'roslaunch' : ['="', '$(', '/'],
+			\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+			\ }
