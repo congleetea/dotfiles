@@ -130,10 +130,10 @@ let g:ycm_server_python_interpreter='/usr/bin/python3'
 let g:ycm_global_ycm_extra_conf='~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " ===================== C++ astyle ==============================
-let g:formatdef_my_cpp = '"astyle --options=/home/congleetea/gitlab/dotfiles/configs/astylerc"'
+let g:formatdef_astyle_cpp = '"astyle --options=$HOME/gitlab/dotfiles/configs/astylerc"'
 let g:formatters_cpp = ['astyle_cpp']
-au BufWrite * :Autoformat
-
+noremap <leader>ai :Autoformat<CR>
+" au BufWrite * :Autoformat
 
 " =================Auto generate file header comment ======
 autocmd BufNewFile *.cpp exec ":call SetTitle()"
