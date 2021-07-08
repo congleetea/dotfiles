@@ -27,7 +27,7 @@ set history=1000
 set wildmenu
 set wildmode=longest:list,full
 set laststatus=2
-set iskeyword=a-z,A-Z                "修改单词的定义方式，默认字母，数字和下划线组合都是单词
+" set iskeyword=a-z,A-Z                "修改单词的定义方式，默认字母，数字和下划线组合都是单词
 set clipboard=unnamedplus            "剪切板
 syntax on
 syntax on                    " 开启文件类型侦测
@@ -81,13 +81,14 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-autocmd BufWritePre * :%s/\s\+$//e             "保存的时候删除尾部空格.
-nnoremap <leader>S :%s/\s\+$//e<CR>            "<leader>S删除尾部空格
+autocmd BufWritePre * :%s/\s\+$//e                   "保存的时候删除尾部空格.
+nnoremap <leader>S :%s/\s\+$//e<CR>                  "<leader>S删除尾部空格
+nnoremap <leader>z :exe 'Ag!' expand('<cword>')<cr>  "在工程中查询鼠标处单词
 
 "===================== NERDTree ===========================
 " 在tree界面按m可以出现新建、删除、修改文件等操作.
 nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>             "查看当前目录所在位置，或者显示上一层目录.
+nnoremap <leader>nf :NERDTreeFind<CR>                "查看当前目录所在位置，或者显示上一层目录.
 
 " ===================== fzf ================================
 nnoremap <leader>hp :Files<CR>
@@ -161,7 +162,7 @@ let gtags_file=findfile("GTAGS", ";")     " 查找 gtags 文件
 if !empty(gtags_file)
 	exe "cs add" gtags_file
 endif
-
+" set cscopequickfix=s-,g-,c-,d-,i-,t-,e-
 function! UpdateGtags()
 	let curdir=getcwd()
 	while !filereadable("./GTAGS")
@@ -178,6 +179,7 @@ function! UpdateGtags()
 endfunction
 map <leader>t :call UpdateGtags()<CR>
 " autocmd BufWritePost *.cpp,*.h,*.c,*.cc call UpdateGtags()
+let Cscope_OpenQuickfixWindow = 1
 
 " ===================== Snippets ==============================
 let g:UltiSnipsExpandTrigger = "<leader>k"
@@ -189,3 +191,4 @@ let g:ycm_semantic_triggers = {
 			\   'roslaunch' : ['="', '$(', '/'],
 			\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
 			\ }
+

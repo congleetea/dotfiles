@@ -16,3 +16,4 @@
 --indent-switches
 --max-code-length=80
 --indent-after-parens
+--indent-col1-comments
