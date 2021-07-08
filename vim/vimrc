@@ -58,6 +58,7 @@ Plug 'SirVer/ultisnips'
 Plug 'taketwo/vim-ros'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'                    "代码格式化
+Plug 'easymotion/vim-easymotion'                 "快速移动
 call plug#end()
 
 " ===================== Theme ==============================
@@ -192,3 +193,9 @@ let g:ycm_semantic_triggers = {
 			\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
 			\ }
 
+
+" ===================== EasyMotion ==============================
+" s{char}{char} to move to {char}{char}
+nmap <Leader>. <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
