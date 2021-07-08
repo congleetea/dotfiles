@@ -70,8 +70,8 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '"':'"', '#include <':'>'
 " <C+w>h/l/j/k 表示多窗口左右上下切换.
 " sp,vs 表示水平分割窗口和垂直分割窗口。
 nmap <leader>o <C-w>o       "关闭其他窗口,只保留鼠标所在的窗口
-nmap <leader>q <C-w>c       "关闭当前窗口
-nnoremap <leader>d :bd<CR>  "关闭当前缓冲buffer
+nmap <leader>D <C-w>c       "关闭当前窗口
+nnoremap <leader>d :bp<CR>  "关闭当前缓冲buffer
 nmap <C-x>3 <C-w>v           "打开一个垂直窗口
 nmap <C-x>4 <C-w>s           "打开一个水平窗口
 nmap <C-w-=> <C-w-+>

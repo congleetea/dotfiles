@@ -7,6 +7,7 @@ class $2 {
 };
 } // namespace $1
 endsnippet
+
 snippet mycppconstructor "C++ Constructor"
 $1();
 $1(const $1&);
@@ -41,5 +42,13 @@ int main(int argc, char** argv) {
   $1::$2 $1;
   ros::spin();
   return 0;
+}
+endsnippet
+
+snippet mycpptry "C++ try... catch..."
+try {
+  $1
+} catch (const std::exception &e) {
+  std::cerr << e.what() << std::endl;
 }
 endsnippet

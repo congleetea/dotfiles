@@ -1,0 +1,25 @@
+snippet myshheader "shell script header"
+#!/bin/bash
+endsnippet
+
+snippet myshfiledir "shell pwd"
+${1}_DIR=$( cd "$( dirname "\${BASH_SOURCE[0]}" )" && pwd)
+endsnippet
+
+snippet myechoinfo "shell echo info."
+function echo_info(){
+	echo -e "\033[37m \$1 \033[0m"
+}
+endsnippet
+
+snippet myechowarn "shell echo warn."
+function echo_warn(){
+	echo -e "\033[34m \$1 \033[0m"
+}
+endsnippet
+
+snippet myechoerror "shell echo error."
+function echo_error(){
+	echo -e "\033[31m \$1 \033[0m"
+}
+endsnippet
