@@ -9,7 +9,6 @@ set encoding=utf-8                   "Force UTF-8 encoding for special character
 set tabstop=2
 set shiftwidth=2
 set hidden
-set autoread
 set ruler
 set autoindent
 set foldenable
@@ -59,6 +58,8 @@ Plug 'taketwo/vim-ros'
 Plug 'tpope/vim-surround'
 Plug 'Chiel92/vim-autoformat'                    "代码格式化
 Plug 'easymotion/vim-easymotion'                 "快速移动
+Plug 'ianva/vim-youdao-translater'               "有道词典翻译
+Plug 'djoshea/vim-autoread'                      "外部修改文件后自动重新加载
 call plug#end()
 
 " ===================== Theme ==============================
@@ -193,6 +194,11 @@ let g:ycm_semantic_triggers = {
 			\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
 			\ }
 
+
+" ===================== YouDao Dict==============================
+vnoremap <silent> <leader>yt :<C-u>Ydv<CR>
+nnoremap <silent> <leader>yt :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
 
 " ===================== EasyMotion ==============================
 " s{char}{char} to move to {char}{char}

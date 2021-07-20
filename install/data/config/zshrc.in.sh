@@ -188,7 +188,7 @@ function noproxy() {
 }
 
 function runeasyconnect() {
-    /bin/bash ~/.shell/run-easyconnect.sh & 
+    /bin/bash ~/.shell/run-easyconnect.sh &
 }
 
 alias aptversion="apt-cache madison "
@@ -210,8 +210,8 @@ if [ -f ~/gitlab/catkin_ws/devel/setup.zsh ];then
 	source ~/gitlab/catkin_ws/devel/setup.zsh
 fi
 # source /home/muyuan/muyuanros/ros_app/setup.zsh
-export ROS_IP=192.168.1.101
-export ROS_MASTER_URI=http://192.168.1.2:11311
+#export ROS_IP=192.168.1.101
+#export ROS_MASTER_URI=http://192.168.1.2:11311
 
 ## For Golang
 export GOROOT=/usr/local/go
